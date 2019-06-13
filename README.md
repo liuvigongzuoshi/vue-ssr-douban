@@ -1,18 +1,12 @@
-# vue-douban
+# vue-ssr-douban
 
-> A Vue.js project
+A Vue SSR Project
+
+[![Build Status](https://www.travis-ci.org/liuvigongzuoshi/vue-ssr-douban.svg?branch=master)](https://www.travis-ci.org/liuvigongzuoshi/vue-ssr-douban)
 
 ## 技术栈
 
 vue + vuex + vue-router + axios + webpack + ES6
-
-## 文章地址
-
-#### [基于vue搭建一个简易版豆瓣](https://juejin.im/post/5aa686f86fb9a028c42ddadb)
-
-## 项目运行
-
-#### 源码地址： [https://github.com/nh0007/vue-douban.git](https://github.com/nh0007/vue-douban.git)
 
 #### 如何运行
 运行前请先确认电脑上已经安装好node环境
@@ -100,5 +94,3 @@ npm run dev
 搜索页：
 ![search](https://github.com/nh0007/vue-douban/raw/master/screenshot/search.png)
 
-## 结语
-由于工作中使用的框架并不是vue,对vue的了解也并不深入，如果项目中有出现啥问题或者更加好的实现，欢迎issue。另外，欢迎star哦。

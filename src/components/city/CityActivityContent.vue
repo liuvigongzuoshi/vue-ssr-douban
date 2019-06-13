@@ -1,16 +1,16 @@
 <template>
   <div class="left-content">
-    <city-activity-content-item 
+    <city-activity-content-item
       v-for="(activityType, index) in activityTypes"
       :key="index"
-      :activityType="activityType"
-      :dayTypes="dayTypes"
+      :activity-type="activityType"
+      :day-types="dayTypes"
     />
   </div>
 </template>
 
 <script>
-import CityActivityContentItem from './CityActivityContentItem.vue'
+import CityActivityContentItem from './CityActivityContentItem.vue';
 export default {
   name: 'CityActivityContent',
   components: {
@@ -18,12 +18,12 @@ export default {
   },
 
   computed: {
-    activityTypes () {
-      return this.$store.state.city.activityTypes
+    activityTypes() {
+      return this.$store.state.city.activityTypes;
     },
-    dayTypes () {
-      return this.$store.state.city.dayTypes
+    dayTypes() {
+      return this.$store.state.city.dayTypes;
     }
   }
-}
+};
 </script>
