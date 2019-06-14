@@ -1,5 +1,5 @@
-import axios from 'axios';
-import * as types from '../mutation-types';
+import axios from 'axios'
+import * as types from '../mutation-types'
 
 const bookTags = [
   {
@@ -26,9 +26,9 @@ const bookTags = [
     tagName: '科技',
     subTags: ['科普', '互联网', '编程', '交互设计', '算法', '通信', '神经网络', '用户体验', '程序', '科技', 'web']
   }
-];
+]
 
-const bookTypes = ['虚构类', '非虚构类'];
+const bookTypes = ['虚构类', '非虚构类']
 
 const state = {
   bookTags,
@@ -40,41 +40,41 @@ const state = {
   currentBookType: bookTypes[0],
   typeBooks: {},
   currentTypeBooks: []
-};
+}
 
 const mutations = {
   [types.SET_CURRENT_BOOK_TAGS](state, tags) {
-    state.currentBookTags = tags;
+    state.currentBookTags = tags
   },
   [types.SET_CURRENT_BOOK_TAG](state, tag) {
-    state.currentBookTag = tag;
+    state.currentBookTag = tag
   },
   [types.SET_TAG_BOOKS](state, { books, type }) {
     // 当type为merge时，会将新的数据与原来的数据合并
     if (type !== 'merge') {
-      state.tagBooks[state.currentBookTag] = books;
+      state.tagBooks[state.currentBookTag] = books
     } else {
-      state.tagBooks[state.currentBookTag] = state.tagBooks[state.currentBookTag].concat(books);
+      state.tagBooks[state.currentBookTag] = state.tagBooks[state.currentBookTag].concat(books)
     }
   },
   [types.SET_CURRENT_TAG_BOOKS](state, { books, type }) {
     // 当type为merge时，会将新的数据与原来的数据合并
     if (type !== 'merge') {
-      state.currentTagBooks = books;
+      state.currentTagBooks = books
     } else {
-      state.currentTagBooks = state.currentTagBooks.concat(books);
+      state.currentTagBooks = state.currentTagBooks.concat(books)
     }
   },
   [types.SET_CURRENT_BOOK_TYPE](state, type) {
-    state.currentBookType = type;
+    state.currentBookType = type
   },
   [types.SET_TYPE_BOOKS](state, books) {
-    state.typeBooks[state.currentBookType] = books;
+    state.typeBooks[state.currentBookType] = books
   },
   [types.SET_CURRENT_TYPE_BOOKS](state, books) {
-    state.currentTypeBooks = books;
+    state.currentTypeBooks = books
   }
-};
+}
 
 const actions = {
   getCurrentTagBooks({ commit, state }, { count = 10, start = 0, type }) {
@@ -87,9 +87,9 @@ const actions = {
         }
       })
       .then(response => {
-        commit(types.SET_TAG_BOOKS, { books: response.data.books, type });
-        commit(types.SET_CURRENT_TAG_BOOKS, { books: response.data.books, type });
-      });
+        commit(types.SET_TAG_BOOKS, { books: response.data.books, type })
+        commit(types.SET_CURRENT_TAG_BOOKS, { books: response.data.books, type })
+      })
   },
   getTypeBooks({ commit, state }, { count = 10, start = 0 }) {
     axios
@@ -101,14 +101,14 @@ const actions = {
         }
       })
       .then(response => {
-        commit(types.SET_TYPE_BOOKS, response.data.books);
-        commit(types.SET_CURRENT_TYPE_BOOKS, response.data.books);
-      });
+        commit(types.SET_TYPE_BOOKS, response.data.books)
+        commit(types.SET_CURRENT_TYPE_BOOKS, response.data.books)
+      })
   }
-};
+}
 
 export default {
   state,
   mutations,
   actions
-};
+}

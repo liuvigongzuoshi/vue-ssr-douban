@@ -1,19 +1,19 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from 'vue'
+import Router from 'vue-router'
 
-Vue.use(Router);
+Vue.use(Router)
 
-const BaseHeader = () => import('../components/common/BaseHeader.vue');
-const BookTag = () => import('../components/book/BookTag.vue');
-const BookTagContent = () => import('../components/book/BookTagContent.vue');
-const BookTagMoreContent = () => import('../components/book/BookTagMoreContent.vue');
-const BookTypeContent = () => import('../components/book/BookTypeContent.vue');
-const MovieTimeTypeContent = () => import('../components/movie/MovieTimeTypeContent.vue');
-const MovieTagContent = () => import('../components/movie/MovieTagContent.vue');
-const MovieTag = () => import('../components/movie/MovieTag.vue');
-const MusicTagContent = () => import('../components/music/MusicTagContent.vue');
-const CityTag = () => import('../components/city/CityTag.vue');
-const CityActivityContent = () => import('../components/city/CityActivityContent');
+const BaseHeader = () => import('../components/common/BaseHeader.vue')
+const BookTag = () => import('../components/book/BookTag.vue')
+const BookTagContent = () => import('../components/book/BookTagContent.vue')
+const BookTagMoreContent = () => import('../components/book/BookTagMoreContent.vue')
+const BookTypeContent = () => import('../components/book/BookTypeContent.vue')
+const MovieTimeTypeContent = () => import('../components/movie/MovieTimeTypeContent.vue')
+const MovieTagContent = () => import('../components/movie/MovieTagContent.vue')
+const MovieTag = () => import('../components/movie/MovieTag.vue')
+const MusicTagContent = () => import('../components/music/MusicTagContent.vue')
+const CityTag = () => import('../components/city/CityTag.vue')
+const CityActivityContent = () => import('../components/city/CityActivityContent')
 
 export default new Router({
   routes: [
@@ -82,4 +82,4 @@ export default new Router({
       }
     }
   ]
-});
+})

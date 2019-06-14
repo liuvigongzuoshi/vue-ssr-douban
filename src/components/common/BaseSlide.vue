@@ -1,10 +1,8 @@
 <template>
   <div>
     <ol class="slide-dots">
-      <li v-for="page in pageCount"
-:key="page">
-        <a href="javascript:void(0)"
-:style="activePageStyle(page - 1)" @click="toPage(page - 1)" />
+      <li v-for="page in pageCount" :key="page">
+        <a href="javascript:void(0)" :style="activePageStyle(page - 1)" @click="toPage(page - 1)" />
       </li>
     </ol>
 
@@ -49,35 +47,35 @@ export default {
 
   computed: {
     prevPage() {
-      return this.currentPage === 0 ? this.pageCount - 1 : this.currentPage - 1;
+      return this.currentPage === 0 ? this.pageCount - 1 : this.currentPage - 1
     },
     nextPage() {
-      return this.currentPage === this.pageCount - 1 ? 0 : this.currentPage + 1;
+      return this.currentPage === this.pageCount - 1 ? 0 : this.currentPage + 1
     }
   },
 
   methods: {
     toPage(page, direction) {
       // 判断滑动的方向
-      let slideDirection;
+      let slideDirection
       if (direction) {
-        slideDirection = direction;
+        slideDirection = direction
       } else {
-        slideDirection = page < this.currentPage ? 'left' : 'right';
+        slideDirection = page < this.currentPage ? 'left' : 'right'
       }
-      this.$emit('change-page', page);
-      this.$emit('change-direction', slideDirection);
+      this.$emit('change-page', page)
+      this.$emit('change-direction', slideDirection)
     },
 
     activePageStyle(page) {
       if (page === this.currentPage) {
         return {
           background: this.backgroundColor
-        };
+        }
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

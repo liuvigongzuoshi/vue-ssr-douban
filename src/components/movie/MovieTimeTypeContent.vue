@@ -24,19 +24,14 @@
       />
     </div>
 
-    <transition-group tag="div"
-class="movie-target" :name="transitionName">
-      <ul v-for="(movies, index) in processedMovie"
-:key="index" v-show="index === currentPage" class="movie-list">
-        <li v-for="movie in movies"
-:key="movie.id" class="movie-item">
+    <transition-group tag="div" class="movie-target" :name="transitionName">
+      <ul v-for="(movies, index) in processedMovie" v-show="index === currentPage" :key="index" class="movie-list">
+        <li v-for="movie in movies" :key="movie.id" class="movie-item">
           <a :href="movie.alt">
-            <img
-:src="movie.images.large" :alt="movie.title" class="movie-image" />
+            <img :src="movie.images.large" :alt="movie.title" class="movie-image" />
           </a>
           <h3 class="movie-title-target">
-            <a :href="movie.alt"
-class="movie-title" :title="movie.title">
+            <a :href="movie.alt" class="movie-title" :title="movie.title">
               {{ movie.title }}
             </a>
           </h3>
@@ -44,24 +39,20 @@ class="movie-title" :title="movie.title">
             暂无评分
           </p>
           <p v-if="movie.rating.average !== 0">
-            <span class="score-image"
-:style="getStarStyle(movie.rating.average)" />
+            <span class="score-image" :style="getStarStyle(movie.rating.average)" />
             <span class="movie-score">{{ movie.rating.average }}</span>
           </p>
-          <p v-if="currentMovieTimeType.value === 'in_theaters'"
-class="buy-ticket" @click="buyTicket(movie)">
+          <p v-if="currentMovieTimeType.value === 'in_theaters'" class="buy-ticket" @click="buyTicket(movie)">
             选座购票
           </p>
-          <p v-if="currentMovieTimeType.value === 'coming_soon'"
-class="movie-genres">
+          <p v-if="currentMovieTimeType.value === 'coming_soon'" class="movie-genres">
             类型: {{ movieGenresText(movie.genres) }}
           </p>
         </li>
       </ul>
     </transition-group>
 
-    <base-modal v-if="showModal"
-@close="showModal = false">
+    <base-modal v-if="showModal" @close="showModal = false">
       <h3 slot="header">
         您好
       </h3>
@@ -69,8 +60,7 @@ class="movie-genres">
         本程序并无实际购票功能，若您喜欢
         <strong>{{ focusedMovie.title }}</strong>
         ，可往
-        <a href="https://movie.douban.com/"
-class="common-link">豆瓣</a>
+        <a href="https://movie.douban.com/" class="common-link">豆瓣</a>
         查看
       </span>
     </base-modal>
@@ -78,8 +68,8 @@ class="common-link">豆瓣</a>
 </template>
 
 <script>
-import BaseSlide from '../common/BaseSlide.vue';
-import BaseModal from '../common/BaseModal.vue';
+import BaseSlide from '../common/BaseSlide.vue'
+import BaseModal from '../common/BaseModal.vue'
 export default {
   name: 'MovieTimeTypeContent',
   components: {
@@ -93,74 +83,74 @@ export default {
       slideDirection: 'right',
       showModal: false,
       focusedMovie: null
-    };
+    }
   },
 
   computed: {
     movieTimeTypes() {
-      return this.$store.state.movie.movieTimeTypes;
+      return this.$store.state.movie.movieTimeTypes
     },
     currentMovieTimeType() {
-      return this.$store.state.movie.currentMovieTimeType;
+      return this.$store.state.movie.currentMovieTimeType
     },
     timeTypeMovies() {
-      return this.$store.state.movie.timeTypeMovies;
+      return this.$store.state.movie.timeTypeMovies
     },
     currentTimeTypeMovies() {
-      return this.$store.state.movie.currentTimeTypeMovies;
+      return this.$store.state.movie.currentTimeTypeMovies
     },
     processedMovie() {
       // 每个翻滚页显示12部电影
-      return this.myUtils.processedArray(this.currentTimeTypeMovies, 12);
+      return this.myUtils.processedArray(this.currentTimeTypeMovies, 12)
     },
     pageCount() {
       // 通过 当前获取的电影总数/12 大致得出页数
-      return Math.ceil(this.currentTimeTypeMovies.length / 12);
+      return Math.ceil(this.currentTimeTypeMovies.length / 12)
     },
     transitionName() {
-      return this.slideDirection === 'right' ? 'move-to-right' : 'move-to-left';
+      return this.slideDirection === 'right' ? 'move-to-right' : 'move-to-left'
     }
   },
 
   mounted() {
     if (!this.timeTypeMovies[this.currentMovieTimeType.value]) {
       // 默认加载48部电影
-      this.$store.dispatch('getTimeTypeMovies', { start: 0, count: 48 });
+      this.$store.dispatch('getTimeTypeMovies', { start: 0, count: 48 })
     }
   },
 
   methods: {
     changePage(page) {
-      this.currentPage = page;
+      this.currentPage = page
     },
 
     changeDirection(direction) {
-      this.slideDirection = direction;
+      this.slideDirection = direction
     },
 
     changeMovieTimeType(type) {
-      this.$store.commit('SET_CURRENT_MOVIE_TIME_TYPE', type);
+      this.$store.commit('SET_CURRENT_MOVIE_TIME_TYPE', type)
       if (!this.timeTypeMovies[type.value]) {
-        this.$store.dispatch('getTimeTypeMovies', { start: 0, count: 48, searchParams: type.value });
+        this.$store.dispatch('getTimeTypeMovies', { start: 0, count: 48, searchParams: type.value })
       } else {
-        this.$store.commit('SET_CURRENT_TIME_TYPE_MOVIES', this.timeTypeMovies[type.value]);
+        this.$store.commit('SET_CURRENT_TIME_TYPE_MOVIES', this.timeTypeMovies[type.value])
       }
     },
 
     getStarStyle(score) {
-      return this.myUtils.getStarStyle(score);
+      return this.myUtils.getStarStyle(score)
     },
 
     movieGenresText(genres) {
-      return genres.length === 0 ? '暂无' : genres.join(' / ');
+      return genres.length === 0 ? '暂无' : genres.join(' / ')
     },
 
     buyTicket(movie) {
-      this.focusedMovie = movie;
-      this.showModal = true;
+      this.focusedMovie = movie
+      this.showModal = true
     }
   }
-};
+}
 </script>
 
 <style scoped>

@@ -13,19 +13,14 @@
       />
     </div>
 
-    <transition-group tag="div"
-class="movie-content" :name="transitionName">
-      <ul v-for="(movies, index) in processedMovies"
-:key="index" v-show="index === currentPage" class="movie-list">
-        <li v-for="movie in movies"
-:key="movie.id">
+    <transition-group tag="div" class="movie-content" :name="transitionName">
+      <ul v-for="(movies, index) in processedMovies" v-show="index === currentPage" :key="index" class="movie-list">
+        <li v-for="movie in movies" :key="movie.id">
           <a :href="movie.alt">
-            <img
-:src="movie.images.large" :alt="movie.title" class="movie-image" />
+            <img :src="movie.images.large" :alt="movie.title" class="movie-image" />
           </a>
           <h3 class="link-title">
-            <a :href="movie.alt"
-:title="movie.title">{{ movie.title }}</a>
+            <a :href="movie.alt" :title="movie.title">{{ movie.title }}</a>
           </h3>
           <p class="movie-score">
             评分：
@@ -39,7 +34,7 @@ class="movie-content" :name="transitionName">
 </template>
 
 <script>
-import BaseSlide from '../common/BaseSlide.vue';
+import BaseSlide from '../common/BaseSlide.vue'
 export default {
   name: 'MovieTagContent',
   components: {
@@ -50,49 +45,49 @@ export default {
     return {
       currentPage: 0,
       slideDirection: 'right'
-    };
+    }
   },
 
   computed: {
     currentMovieTag() {
-      return this.$store.state.movie.currentMovieTag;
+      return this.$store.state.movie.currentMovieTag
     },
     tagMovies() {
-      return this.$store.state.movie.tagMovies;
+      return this.$store.state.movie.tagMovies
     },
     currentTagMovies() {
-      return this.$store.state.movie.currentTagMovies;
+      return this.$store.state.movie.currentTagMovies
     },
     processedMovies() {
       // 每个翻滚页显示10部电影
-      return this.myUtils.processedArray(this.currentTagMovies, 10);
+      return this.myUtils.processedArray(this.currentTagMovies, 10)
     },
     pageCount() {
       // 通过 当前获取的电影总数/10 大致得出页数
-      return Math.ceil(this.currentTagMovies.length / 10);
+      return Math.ceil(this.currentTagMovies.length / 10)
     },
     transitionName() {
-      return this.slideDirection === 'right' ? 'move-to-right' : 'move-to-left';
+      return this.slideDirection === 'right' ? 'move-to-right' : 'move-to-left'
     }
   },
 
   mounted() {
     if (!this.tagMovies[this.currentMovieTag]) {
       // 默认显示20部电影
-      this.$store.dispatch('getCurrentTagMovies', { count: 20 });
+      this.$store.dispatch('getCurrentTagMovies', { count: 20 })
     }
   },
 
   methods: {
     changePage(page) {
-      this.currentPage = page;
+      this.currentPage = page
     },
 
     changeDirection(direction) {
-      this.slideDirection = direction;
+      this.slideDirection = direction
     }
   }
-};
+}
 </script>
 
 <style scoped>

@@ -1,7 +1,7 @@
-import axios from 'axios';
-import * as types from '../mutation-types';
+import axios from 'axios'
+import * as types from '../mutation-types'
 
-const movieTimeTypes = [{ value: 'in_theaters', text: '正在热映' }, { value: 'coming_soon', text: '即将上映' }];
+const movieTimeTypes = [{ value: 'in_theaters', text: '正在热映' }, { value: 'coming_soon', text: '即将上映' }]
 
 const movieTags = [
   '热门',
@@ -21,7 +21,7 @@ const movieTags = [
   '可播放',
   '豆瓣高分',
   '冷门佳片'
-];
+]
 
 const state = {
   movieTimeTypes,
@@ -32,28 +32,28 @@ const state = {
   currentMovieTag: movieTags[0],
   tagMovies: {},
   currentTagMovies: []
-};
+}
 
 const mutations = {
   [types.SET_CURRENT_MOVIE_TIME_TYPE](state, timeType) {
-    state.currentMovieTimeType = timeType;
+    state.currentMovieTimeType = timeType
   },
   [types.SET_TIME_TYPE_MOVIES](state, movies) {
-    state.timeTypeMovies[state.currentMovieTimeType.value] = movies;
+    state.timeTypeMovies[state.currentMovieTimeType.value] = movies
   },
   [types.SET_CURRENT_TIME_TYPE_MOVIES](state, movies) {
-    state.currentTimeTypeMovies = movies;
+    state.currentTimeTypeMovies = movies
   },
   [types.SET_CURRENT_MOVIE_TAG](state, tag) {
-    state.currentMovieTag = tag;
+    state.currentMovieTag = tag
   },
   [types.SET_TAG_MOVIES](state, movies) {
-    state.tagMovies[state.currentMovieTag] = movies;
+    state.tagMovies[state.currentMovieTag] = movies
   },
   [types.SET_CURRENT_TAG_MOVIES](state, movies) {
-    state.currentTagMovies = movies;
+    state.currentTagMovies = movies
   }
-};
+}
 
 const actions = {
   getTimeTypeMovies({ commit }, { start = 0, count = 10, searchParams = 'in_theaters' }) {
@@ -65,9 +65,9 @@ const actions = {
         }
       })
       .then(response => {
-        commit(types.SET_TIME_TYPE_MOVIES, response.data.subjects);
-        commit(types.SET_CURRENT_TIME_TYPE_MOVIES, response.data.subjects);
-      });
+        commit(types.SET_TIME_TYPE_MOVIES, response.data.subjects)
+        commit(types.SET_CURRENT_TIME_TYPE_MOVIES, response.data.subjects)
+      })
   },
   getCurrentTagMovies({ commit, state }, { start = 0, count = 10 }) {
     axios
@@ -79,14 +79,14 @@ const actions = {
         }
       })
       .then(response => {
-        commit(types.SET_TAG_MOVIES, response.data.subjects);
-        commit(types.SET_CURRENT_TAG_MOVIES, response.data.subjects);
-      });
+        commit(types.SET_TAG_MOVIES, response.data.subjects)
+        commit(types.SET_CURRENT_TAG_MOVIES, response.data.subjects)
+      })
   }
-};
+}
 
 export default {
   state,
   mutations,
   actions
-};
+}

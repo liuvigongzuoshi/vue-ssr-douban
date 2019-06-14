@@ -22,26 +22,26 @@ export default {
   name: 'CityTag',
   computed: {
     cities() {
-      return this.$store.state.city.cities;
+      return this.$store.state.city.cities
     },
     currentCity() {
-      return this.$store.state.city.currentCity;
+      return this.$store.state.city.currentCity
     }
   },
 
   mounted() {
     if (this.cities.length === 0) {
       // 默认获取20个城市
-      this.$store.dispatch('getCities', { start: 0, count: 20 });
+      this.$store.dispatch('getCities', { start: 0, count: 20 })
     }
   },
 
   methods: {
     changeCurrentCity(city) {
-      this.$store.commit('SET_CURRENT_CITY', city);
+      this.$store.commit('SET_CURRENT_CITY', city)
     }
   }
-};
+}
 </script>
 
 <style scoped>

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import CityActivityContentItem from './CityActivityContentItem.vue';
+import CityActivityContentItem from './CityActivityContentItem.vue'
 export default {
   name: 'CityActivityContent',
   components: {
@@ -19,11 +19,11 @@ export default {
 
   computed: {
     activityTypes() {
-      return this.$store.state.city.activityTypes;
+      return this.$store.state.city.activityTypes
     },
     dayTypes() {
-      return this.$store.state.city.dayTypes;
+      return this.$store.state.city.dayTypes
     }
   }
-};
+}
 </script>

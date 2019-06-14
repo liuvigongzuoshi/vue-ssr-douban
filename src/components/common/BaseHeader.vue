@@ -1,9 +1,7 @@
 <template>
-  <div class="outer-content"
-:style="{ background: currentModuleType.backgroundColor }">
+  <div class="outer-content" :style="{ background: currentModuleType.backgroundColor }">
     <div class="inner-content">
-      <h2 class="search-logo"
-:class="currentModuleType.logo">
+      <h2 class="search-logo" :class="currentModuleType.logo">
         {{ currentModuleType.text }}
       </h2>
 
@@ -17,18 +15,13 @@
             @blur="onInputBlur()"
             @focus="onInputFocus()"
           />
-          <input
-type="submit" value="搜索" class="search-submit" :class="currentModuleType.searchIcon" />
+          <input type="submit" value="搜索" class="search-submit" :class="currentModuleType.searchIcon" />
         </form>
 
-        <ul v-show="showSearchSuggest"
-class="search-suggest" @mouseenter="onListFocus()" @mouseleave="onListBlur()">
-          <li v-for="item in searchData"
-:key="item.id" class="search-item">
-            <a class="search-item-link"
-:href="item.alt">
-              <img
-class="search-item-image" :src="item.image || item.images.small" referrerpolicy="no-referrer" />
+        <ul v-show="showSearchSuggest" class="search-suggest" @mouseenter="onListFocus()" @mouseleave="onListBlur()">
+          <li v-for="item in searchData" :key="item.id" class="search-item">
+            <a class="search-item-link" :href="item.alt">
+              <img class="search-item-image" :src="item.image || item.images.small" referrerpolicy="no-referrer" />
               <h3 class="search-item-title">
                 {{ item.title }}
               </h3>
@@ -38,12 +31,10 @@ class="search-item-image" :src="item.image || item.images.small" referrerpolicy=
               <span v-if="item.year">
                 {{ item.year }}
               </span>
-              <p v-if="item.author"
-class="search-item-author">
+              <p v-if="item.author" class="search-item-author">
                 {{ item.author | processedAuthor }}
               </p>
-              <p v-if="item.genres"
-class="search-item-genres">
+              <p v-if="item.genres" class="search-item-genres">
                 {{ item.genres.join() }}
               </p>
             </a>
@@ -52,8 +43,7 @@ class="search-item-genres">
       </div>
 
       <ul class="module-list">
-        <li v-for="type in moduleTypes"
-:key="type.value">
+        <li v-for="type in moduleTypes" :key="type.value">
           <span>{{ type.text }}</span>
           <div class="outer-more-module">
             <div class="inner-more-module">
@@ -81,13 +71,13 @@ export default {
     processedAuthor(value) {
       // 根据作者的信息字段
       if (value[0] && value[0].name) {
-        let newValue = '';
+        let newValue = ''
         for (let i = 0, ii = value.length; i < ii; i++) {
-          newValue += value[i].name + ' ';
+          newValue += value[i].name + ' '
         }
-        return newValue;
+        return newValue
       } else {
-        return value.join();
+        return value.join()
       }
     }
   },
@@ -97,25 +87,25 @@ export default {
       isFocusOnInput: false,
       isFocusOnList: false,
       timer: 0
-    };
+    }
   },
 
   computed: {
     moduleTypes() {
-      return this.$store.state.moduleTypes;
+      return this.$store.state.moduleTypes
     },
     currentModuleType() {
-      return this.$store.state.currentModuleType;
+      return this.$store.state.currentModuleType
     },
     searchData() {
-      return this.$store.state.searchData;
+      return this.$store.state.searchData
     },
     showSearchSuggest() {
       // 当在搜索框中输入搜索内容时，会获取搜索结果，搜索结果的显示需满足几个条件：
       // 1、鼠标落在搜索输入框内或者鼠标落在搜索结果显示地容器上；
       // 2、搜索框里有内容
       // 3、返回的搜索结果不能为空
-      return (this.isFocusOnInput || this.isFocusOnList) && this.keyword !== '' && this.searchData.length !== 0;
+      return (this.isFocusOnInput || this.isFocusOnList) && this.keyword !== '' && this.searchData.length !== 0
     }
   },
 
@@ -125,26 +115,26 @@ export default {
       // 设置延时，若用户在200ms内输入不同关键字搜索，会合并成一次请求，以最后一次为准
       if (newValue !== '' && this.currentModuleType.value !== 'city') {
         if (this.timer) {
-          clearTimeout(this.timer);
+          clearTimeout(this.timer)
         }
         this.timer = setTimeout(() => {
-          this.timer = null;
-          this.$store.dispatch('getSearchData', { keyword: newValue });
-        }, 200);
+          this.timer = null
+          this.$store.dispatch('getSearchData', { keyword: newValue })
+        }, 200)
       }
     }
   },
 
   mounted() {
-    let hashName = window.location.hash.replace(/#\/?/, '');
-    this.onHashChange(hashName);
+    let hashName = window.location.hash.replace(/#\/?/, '')
+    this.onHashChange(hashName)
   },
 
   beforeRouteLeave(to, from, next) {
-    this.keyword = '';
-    this.$store.commit('SET_SEARCH_DATA', []);
-    this.onHashChange(to.name);
-    next();
+    this.keyword = ''
+    this.$store.commit('SET_SEARCH_DATA', [])
+    this.onHashChange(to.name)
+    next()
   },
 
   methods: {
@@ -153,30 +143,30 @@ export default {
       if (hashName.indexOf(this.currentModuleType.value) === -1) {
         for (let i = 0, ii = this.moduleTypes.length; i < ii; i++) {
           if (hashName.indexOf(this.moduleTypes[i].value) !== -1) {
-            this.$store.commit('CHANGE_CURRENT_MODULE_TYPE', this.moduleTypes[i]);
-            return;
+            this.$store.commit('CHANGE_CURRENT_MODULE_TYPE', this.moduleTypes[i])
+            return
           }
         }
       }
     },
 
     onInputFocus() {
-      this.isFocusOnInput = true;
+      this.isFocusOnInput = true
     },
 
     onInputBlur() {
-      this.isFocusOnInput = false;
+      this.isFocusOnInput = false
     },
 
     onListFocus() {
-      this.isFocusOnList = true;
+      this.isFocusOnList = true
     },
 
     onListBlur() {
-      this.isFocusOnList = false;
+      this.isFocusOnList = false
     }
   }
-};
+}
 </script>
 
 <style scoped>

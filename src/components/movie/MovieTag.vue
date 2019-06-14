@@ -22,27 +22,27 @@ export default {
   name: 'MovieTag',
   computed: {
     movieTags() {
-      return this.$store.state.movie.movieTags;
+      return this.$store.state.movie.movieTags
     },
     currentMovieTag() {
-      return this.$store.state.movie.currentMovieTag;
+      return this.$store.state.movie.currentMovieTag
     },
     tagMovies() {
-      return this.$store.state.movie.tagMovies;
+      return this.$store.state.movie.tagMovies
     }
   },
 
   methods: {
     changeMovieTag(tag) {
-      this.$store.commit('SET_CURRENT_MOVIE_TAG', tag);
+      this.$store.commit('SET_CURRENT_MOVIE_TAG', tag)
       if (!this.tagMovies[tag]) {
-        this.$store.dispatch('getCurrentTagMovies', { count: 20 });
+        this.$store.dispatch('getCurrentTagMovies', { count: 20 })
       } else {
-        this.$store.commit('SET_CURRENT_TAG_MOVIES', this.tagMovies[tag]);
+        this.$store.commit('SET_CURRENT_TAG_MOVIES', this.tagMovies[tag])
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

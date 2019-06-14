@@ -2,8 +2,7 @@
   <div class="music-tag-content">
     <div class="music-tags">
       <ul>
-        <li v-for="(tag, index) in musicTags"
-:key="index" class="music-tag-item">
+        <li v-for="(tag, index) in musicTags" :key="index" class="music-tag-item">
           <a
             href="javascript: void(0)"
             :class="{ active: tag === currentMusicTag, 'not-active': tag !== currentMusicTag }"
@@ -17,17 +16,13 @@
 
     <div class="music-list">
       <ul>
-        <li v-for="music in currentTagMusics"
-:key="music.id" class="music-item">
+        <li v-for="music in currentTagMusics" :key="music.id" class="music-item">
           <div class="cover">
             <a href="javascript: void(0)">
-              <img
-:src="music.image" class="music-image" referrerpolicy="no-referrer" />
+              <img :src="music.image" class="music-image" referrerpolicy="no-referrer" />
             </a>
-            <a class="image-hover"
-:href="music.alt">
-              <p v-for="(song, index) in getSongArray(music.attrs.tracks[0])"
-:key="index">
+            <a class="image-hover" :href="music.alt">
+              <p v-for="(song, index) in getSongArray(music.attrs.tracks[0])" :key="index">
                 {{ song }}
               </p>
             </a>
@@ -39,8 +34,7 @@
             {{ music.attrs.singer.join() }}
           </p>
           <p class="music-title">
-            <a :href="music.alt"
-class="music-title-link" :title="music.title">
+            <a :href="music.alt" class="music-title-link" :title="music.title">
               {{ music.title }}
             </a>
           </p>
@@ -55,33 +49,33 @@ export default {
   name: 'MusicTagContent',
   computed: {
     musicTags() {
-      return this.$store.state.music.musicTags;
+      return this.$store.state.music.musicTags
     },
     currentMusicTag() {
-      return this.$store.state.music.currentMusicTag;
+      return this.$store.state.music.currentMusicTag
     },
     tagMusics() {
-      return this.$store.state.music.tagMusics;
+      return this.$store.state.music.tagMusics
     },
     currentTagMusics() {
-      return this.$store.state.music.currentTagMusics;
+      return this.$store.state.music.currentTagMusics
     }
   },
 
   mounted() {
     if (this.currentTagMusics.length === 0) {
       // 默认加载24张专辑
-      this.$store.dispatch('getCurrentTagMusics', { count: 24 });
+      this.$store.dispatch('getCurrentTagMusics', { count: 24 })
     }
   },
 
   methods: {
     changeMusicTag(tag) {
-      this.$store.commit('SET_CURRENT_MUSIC_TAG', tag);
+      this.$store.commit('SET_CURRENT_MUSIC_TAG', tag)
       if (!this.tagMusics[tag]) {
-        this.$store.dispatch('getCurrentTagMusics', { count: 24 });
+        this.$store.dispatch('getCurrentTagMusics', { count: 24 })
       } else {
-        this.$store.commit('SET_CURRENT_TAG_MUSICS', this.tagMusics[tag]);
+        this.$store.commit('SET_CURRENT_TAG_MUSICS', this.tagMusics[tag])
       }
     },
 
@@ -89,12 +83,12 @@ export default {
       // 每张专辑只显示前4首歌
       let songArray = songs.split('\n').map(song => {
         // 截取掉每首歌前面的排序
-        return song.slice(3);
-      });
-      return songArray.slice(0, 4);
+        return song.slice(3)
+      })
+      return songArray.slice(0, 4)
     }
   }
-};
+}
 </script>
 
 <style scoped>

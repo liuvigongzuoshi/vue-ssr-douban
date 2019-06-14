@@ -3,12 +3,9 @@
     <h2 class="content-header">豆瓣读书标签:{{ currentBookTag }}</h2>
 
     <ul>
-      <li v-for="book in currentTagBooks"
-:key="book.id" class="book-item">
-        <a :href="book.alt"
-:title="book.title">
-          <img
-:src="book.images.large" :alt="book.title" class="book-image" />
+      <li v-for="book in currentTagBooks" :key="book.id" class="book-item">
+        <a :href="book.alt" :title="book.title">
+          <img :src="book.images.large" :alt="book.title" class="book-image" />
         </a>
         <div class="book-info">
           <h3 class="link-title">
@@ -19,8 +16,7 @@
             {{ book.price }}
           </p>
           <div>
-            <span class="score-image"
-:style="getStarStyle(book.rating.average)" />
+            <span class="score-image" :style="getStarStyle(book.rating.average)" />
             <span class="average-score">{{ book.rating.average }}</span>
             <span class="raters-number">({{ book.rating.numRaters }}人评价)</span>
           </div>
@@ -28,12 +24,10 @@
             {{ book.summary | processedSummary(80) }}
           </p>
           <div>
-            <a :href="book.alt"
-class="buy-books">
+            <a :href="book.alt" class="buy-books">
               去豆瓣购买
             </a>
-            <a :href="book.ebook_url"
-class="e-book">
+            <a :href="book.ebook_url" class="e-book">
               去看电子版
             </a>
           </div>
@@ -41,8 +35,7 @@ class="e-book">
       </li>
     </ul>
 
-    <a class="more-book"
-href="javascript:void(0)" @click="loadMoreBooks">
+    <a class="more-book" href="javascript:void(0)" @click="loadMoreBooks">
       加载更多
     </a>
   </div>
@@ -54,50 +47,50 @@ export default {
 
   filters: {
     processedSummary(msg, endIndex) {
-      return msg.length >= endIndex ? msg.substring(0, endIndex) + '...' : msg;
+      return msg.length >= endIndex ? msg.substring(0, endIndex) + '...' : msg
     }
   },
   data() {
     return {
       // 一开始默认一页显示十本书
       bookCountPerPage: 10
-    };
+    }
   },
 
   computed: {
     currentBookTag() {
-      return this.$store.state.book.currentBookTag;
+      return this.$store.state.book.currentBookTag
     },
     currentTagBooks() {
-      return this.$store.state.book.currentTagBooks.slice(0, this.bookCountPerPage);
+      return this.$store.state.book.currentTagBooks.slice(0, this.bookCountPerPage)
     }
   },
 
   mounted() {
     if (this.currentTagBooks.length === 0) {
-      this.$store.dispatch('getCurrentTagBooks', { count: 10 });
+      this.$store.dispatch('getCurrentTagBooks', { count: 10 })
     }
   },
 
   methods: {
     getStarStyle(score) {
-      return this.myUtils.getStarStyle(score);
+      return this.myUtils.getStarStyle(score)
     },
 
     loadMoreBooks() {
       //  每次点击加载更多时，会加载多十条数据，若缓存中的数据满足需求，则从缓存读取，若不满足，则发送网络请求获取数据
-      let bookCount = this.$store.state.book.currentTagBooks.length;
-      this.bookCountPerPage += 10;
+      let bookCount = this.$store.state.book.currentTagBooks.length
+      this.bookCountPerPage += 10
       if (bookCount < this.bookCountPerPage) {
         this.$store.dispatch('getCurrentTagBooks', {
           count: this.bookCountPerPage - bookCount,
           start: bookCount,
           type: 'merge'
-        });
+        })
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

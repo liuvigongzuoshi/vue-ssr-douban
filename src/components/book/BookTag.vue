@@ -35,40 +35,40 @@ export default {
   name: 'BookTag',
   computed: {
     bookTags() {
-      return this.$store.state.book.bookTags;
+      return this.$store.state.book.bookTags
     },
     currentBookTags() {
-      return this.$store.state.book.currentBookTags;
+      return this.$store.state.book.currentBookTags
     },
     currentBookTag() {
-      return this.$store.state.book.currentBookTag;
+      return this.$store.state.book.currentBookTag
     },
     tagBooks() {
-      return this.$store.state.book.tagBooks;
+      return this.$store.state.book.tagBooks
     }
   },
 
   methods: {
     changeCurrentBookTags(tags) {
-      this.$store.commit('SET_CURRENT_BOOK_TAGS', tags);
-      this.$store.commit('SET_CURRENT_BOOK_TAG', tags.subTags[0]);
+      this.$store.commit('SET_CURRENT_BOOK_TAGS', tags)
+      this.$store.commit('SET_CURRENT_BOOK_TAG', tags.subTags[0])
       if (!this.tagBooks[tags.subTags[0]]) {
-        this.$store.dispatch('getCurrentTagBooks', { count: 40 });
+        this.$store.dispatch('getCurrentTagBooks', { count: 40 })
       } else {
-        this.$store.commit('SET_CURRENT_TAG_BOOKS', { books: this.tagBooks[tags.subTags[0]] });
+        this.$store.commit('SET_CURRENT_TAG_BOOKS', { books: this.tagBooks[tags.subTags[0]] })
       }
     },
 
     changeCurrentBookTag(subTag) {
-      this.$store.commit('SET_CURRENT_BOOK_TAG', subTag);
+      this.$store.commit('SET_CURRENT_BOOK_TAG', subTag)
       if (!this.tagBooks[subTag]) {
-        this.$store.dispatch('getCurrentTagBooks', { count: 40 });
+        this.$store.dispatch('getCurrentTagBooks', { count: 40 })
       } else {
-        this.$store.commit('SET_CURRENT_TAG_BOOKS', { books: this.tagBooks[subTag] });
+        this.$store.commit('SET_CURRENT_TAG_BOOKS', { books: this.tagBooks[subTag] })
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

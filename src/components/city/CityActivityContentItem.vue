@@ -1,6 +1,5 @@
 <template>
-  <div v-if="activities.length !== 0"
-class="activity-item">
+  <div v-if="activities.length !== 0" class="activity-item">
     <div class="content-header">
       <h2 class="activity-tag">
         {{ activityType.text }}
@@ -18,23 +17,18 @@ class="activity-item">
     </div>
 
     <ul class="activity-content">
-      <li v-for="activity in activities"
-:key="activity.id" class="activity-sub-item">
-        <a :href="activity.alt"
-class="activity-image-link">
-          <img
-:src="activity.image" class="activity-image" />
+      <li v-for="activity in activities" :key="activity.id" class="activity-sub-item">
+        <a :href="activity.alt" class="activity-image-link">
+          <img :src="activity.image" class="activity-image" />
         </a>
         <div class="more-info">
-          <a :href="activity.alt"
-class="activity-title">
+          <a :href="activity.alt" class="activity-title">
             {{ activity.title }}
           </a>
           <p class="date-info">
             {{ getDateString(activity.begin_time, activity.end_time) }}
           </p>
-          <p class="address-info"
-:title="activity.address">
+          <p class="address-info" :title="activity.address">
             {{ activity.address }}
           </p>
           <p>{{ activity.wisher_count + activity.participant_count }}人关注</p>
@@ -45,7 +39,7 @@ class="activity-title">
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 export default {
   name: 'CityActivityContentItem',
   props: {
@@ -63,27 +57,27 @@ export default {
     return {
       currentDayType: this.dayTypes[0],
       activities: []
-    };
+    }
   },
 
   computed: {
     currentCity() {
-      return this.$store.state.city.currentCity;
+      return this.$store.state.city.currentCity
     }
   },
 
   watch: {
     currentCity() {
-      this.getActivities();
+      this.getActivities()
     },
     currentDayType() {
-      this.getActivities();
+      this.getActivities()
     }
   },
 
   mounted() {
     if (this.activities.length === 0 && this.currentCity) {
-      this.getActivities();
+      this.getActivities()
     }
   },
 
@@ -101,41 +95,41 @@ export default {
           }
         })
         .then(response => {
-          this.activities = response.data.events;
-        });
+          this.activities = response.data.events
+        })
     },
 
     getDateString(startTime, endTime) {
       // 处理后台返回的起止时间格式，同一天的话返回这种格式：x月x日 19:30 - 21:30
       // 不同天的话返回这种格式：x月x日 至 y月y日
-      let startDate = new Date(startTime);
-      let endDate = new Date(endTime);
-      let startMonth = startDate.getMonth() + 1;
-      let endMonth = endDate.getMonth() + 1;
-      let startDay = startDate.getDate();
-      let endDay = endDate.getDate();
-      let startHour = startDate.getHours();
-      let endHour = endDate.getHours();
-      let startMinute = startDate.getMinutes();
-      let endMinute = endDate.getMinutes();
-      let timeArray = [startHour, endHour, startMinute, endMinute];
+      let startDate = new Date(startTime)
+      let endDate = new Date(endTime)
+      let startMonth = startDate.getMonth() + 1
+      let endMonth = endDate.getMonth() + 1
+      let startDay = startDate.getDate()
+      let endDay = endDate.getDate()
+      let startHour = startDate.getHours()
+      let endHour = endDate.getHours()
+      let startMinute = startDate.getMinutes()
+      let endMinute = endDate.getMinutes()
+      let timeArray = [startHour, endHour, startMinute, endMinute]
       for (let i = 0, ii = timeArray.length; i < ii; i++) {
         if (timeArray[i] < 10) {
-          timeArray[i] = `0${timeArray}`;
+          timeArray[i] = `0${timeArray}`
         }
       }
       if (startMonth === endMonth && startDay === endDay) {
-        return `${startMonth}月${startDay}日  ${timeArray[0]}:${timeArray[2]} - ${timeArray[1]}:${timeArray[2]}`;
+        return `${startMonth}月${startDay}日  ${timeArray[0]}:${timeArray[2]} - ${timeArray[1]}:${timeArray[2]}`
       } else {
-        return `${startMonth}月${startDay}日  至  ${endMonth}月${endDay}日`;
+        return `${startMonth}月${startDay}日  至  ${endMonth}月${endDay}日`
       }
     },
 
     changeDayType(type) {
-      this.currentDayType = type;
+      this.currentDayType = type
     }
   }
-};
+}
 </script>
 
 <style scoped>
