@@ -27,7 +27,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxy: {
       '/api': {
-        target: 'https://api.douban.com',
+        target: 'https://douban.uieee.com',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/v2'
