@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import request from '@/util/request'
 export default {
   name: 'CityActivityContentItem',
   props: {
@@ -84,8 +84,8 @@ export default {
   methods: {
     getActivities(start = 0, count = 6) {
       // 获取某个城市，某种的活动类型（音乐、戏剧等），在某个时间段内的活动列表
-      axios
-        .get('/api/event/list', {
+      request
+        .get('/v2/event/list', {
           params: {
             loc: this.currentCity.id,
             day_type: this.currentDayType.value,
@@ -95,7 +95,7 @@ export default {
           }
         })
         .then(response => {
-          this.activities = response.data.events
+          this.activities = response.events
         })
     },
 

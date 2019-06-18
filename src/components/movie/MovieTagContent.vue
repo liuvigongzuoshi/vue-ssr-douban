@@ -14,10 +14,10 @@
     </div>
 
     <transition-group tag="div" class="movie-content" :name="transitionName">
-      <ul v-for="(movies, index) in processedMovies" v-show="index === currentPage" :key="index" class="movie-list">
+      <ul v-for="(movies, index) in processedMovies" v-show="index === currentPage" :key="index + 1" class="movie-list">
         <li v-for="movie in movies" :key="movie.id">
           <a :href="movie.alt">
-            <img :src="movie.images.large" :alt="movie.title" class="movie-image" />
+            <img :src="movie.images.large" :alt="movie.title" class="movie-image" referrerpolicy="no-referrer" />
           </a>
           <h3 class="link-title">
             <a :href="movie.alt" :title="movie.title">{{ movie.title }}</a>

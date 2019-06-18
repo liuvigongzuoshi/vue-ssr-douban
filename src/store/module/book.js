@@ -1,4 +1,4 @@
-import axios from 'axios'
+import request from '@/util/request'
 import * as types from '../mutation-types'
 
 const bookTags = [
@@ -78,8 +78,8 @@ const mutations = {
 
 const actions = {
   getCurrentTagBooks({ commit, state }, { count = 10, start = 0, type }) {
-    axios
-      .get('./api/book/search', {
+    request
+      .get('/v2/book/search', {
         params: {
           tag: state.currentBookTag,
           count,
@@ -87,13 +87,13 @@ const actions = {
         }
       })
       .then(response => {
-        commit(types.SET_TAG_BOOKS, { books: response.data.books, type })
-        commit(types.SET_CURRENT_TAG_BOOKS, { books: response.data.books, type })
+        commit(types.SET_TAG_BOOKS, { books: response.books, type })
+        commit(types.SET_CURRENT_TAG_BOOKS, { books: response.books, type })
       })
   },
   getTypeBooks({ commit, state }, { count = 10, start = 0 }) {
-    axios
-      .get('./api/book/search', {
+    request
+      .get('/v2/book/search', {
         params: {
           q: state.currentBookType,
           count,
@@ -101,8 +101,8 @@ const actions = {
         }
       })
       .then(response => {
-        commit(types.SET_TYPE_BOOKS, response.data.books)
-        commit(types.SET_CURRENT_TYPE_BOOKS, response.data.books)
+        commit(types.SET_TYPE_BOOKS, response.books)
+        commit(types.SET_CURRENT_TYPE_BOOKS, response.books)
       })
   }
 }

@@ -25,10 +25,10 @@
     </div>
 
     <transition-group tag="div" class="movie-target" :name="transitionName">
-      <ul v-for="(movies, index) in processedMovie" v-show="index === currentPage" :key="index" class="movie-list">
+      <ul v-for="(movies, index) in processedMovie" v-show="index === currentPage" :key="index + 1" class="movie-list">
         <li v-for="movie in movies" :key="movie.id" class="movie-item">
           <a :href="movie.alt">
-            <img :src="movie.images.large" :alt="movie.title" class="movie-image" />
+            <img :src="movie.images.large" :alt="movie.title" class="movie-image" referrerpolicy="no-referrer" />
           </a>
           <h3 class="movie-title-target">
             <a :href="movie.alt" class="movie-title" :title="movie.title">

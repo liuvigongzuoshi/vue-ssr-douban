@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+import request from '@/util/request'
 import * as types from './mutation-types'
 import book from './module/book'
 import movie from './module/movie'
@@ -99,8 +99,8 @@ const mutations = {
 const actions = {
   // 根据关键字以及当前所处的模块发送对应的搜索请求，处在读书模块和电影模块搜索相同的关键字发送的是不同的请求
   getSearchData({ commit, state }, { keyword, count = 6, start = 0 }) {
-    axios
-      .get(`./api/${state.currentModuleType.value}/search`, {
+    request
+      .get(`/v2/${state.currentModuleType.value}/search`, {
         params: {
           q: keyword,
           start,
@@ -108,7 +108,7 @@ const actions = {
         }
       })
       .then(response => {
-        commit(types.SET_SEARCH_DATA, response.data[state.currentModuleType.field])
+        commit(types.SET_SEARCH_DATA, response[state.currentModuleType.field])
       })
   }
 }

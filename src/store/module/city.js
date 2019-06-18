@@ -1,4 +1,4 @@
-import axios from 'axios'
+import request from '@/util/request'
 import * as types from '../mutation-types'
 
 const activityTypes = [
@@ -38,16 +38,16 @@ const mutations = {
 
 const actions = {
   getCities({ commit }, { start = 0, count = 20 }) {
-    axios
-      .get('./api/loc/list', {
+    request
+      .get('/v2/loc/list', {
         params: {
           start,
           count
         }
       })
       .then(response => {
-        commit(types.SET_CITIES, response.data.locs)
-        commit(types.SET_CURRENT_CITY, response.data.locs[0])
+        commit(types.SET_CITIES, response.locs)
+        commit(types.SET_CURRENT_CITY, response.locs[0])
       })
   }
 }

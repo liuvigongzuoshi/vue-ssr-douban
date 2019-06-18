@@ -1,4 +1,4 @@
-import axios from 'axios'
+import request from '@/util/request'
 import * as types from '../mutation-types'
 
 const movieTimeTypes = [{ value: 'in_theaters', text: '正在热映' }, { value: 'coming_soon', text: '即将上映' }]
@@ -57,21 +57,21 @@ const mutations = {
 
 const actions = {
   getTimeTypeMovies({ commit }, { start = 0, count = 10, searchParams = 'in_theaters' }) {
-    axios
-      .get(`/api/movie/${searchParams}`, {
+    request
+      .get(`/v2/movie/${searchParams}`, {
         params: {
           start,
           count
         }
       })
       .then(response => {
-        commit(types.SET_TIME_TYPE_MOVIES, response.data.subjects)
-        commit(types.SET_CURRENT_TIME_TYPE_MOVIES, response.data.subjects)
+        commit(types.SET_TIME_TYPE_MOVIES, response.subjects)
+        commit(types.SET_CURRENT_TIME_TYPE_MOVIES, response.subjects)
       })
   },
   getCurrentTagMovies({ commit, state }, { start = 0, count = 10 }) {
-    axios
-      .get('/api/movie/search', {
+    request
+      .get('/v2/movie/search', {
         params: {
           start,
           count,
@@ -79,8 +79,8 @@ const actions = {
         }
       })
       .then(response => {
-        commit(types.SET_TAG_MOVIES, response.data.subjects)
-        commit(types.SET_CURRENT_TAG_MOVIES, response.data.subjects)
+        commit(types.SET_TAG_MOVIES, response.subjects)
+        commit(types.SET_CURRENT_TAG_MOVIES, response.subjects)
       })
   }
 }

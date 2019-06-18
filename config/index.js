@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   build: {
@@ -26,13 +26,13 @@ module.exports = {
     assetsSubDirectory: '',
     assetsPublicPath: '/',
     proxy: {
-      '/api': {
+      '/v2': {
         target: 'https://douban.uieee.com',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': '/v2'
-        }
+        changeOrigin: true
+        // pathRewrite: {
+        //   '^/api': '/v2'
+        // }
       }
     }
   }
-};
+}

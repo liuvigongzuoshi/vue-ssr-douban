@@ -1,4 +1,4 @@
-import axios from 'axios'
+import request from '@/util/request'
 import * as types from '../mutation-types'
 
 const musicTags = ['华语', '欧美', '日韩', '流行', '摇滚', '民谣', '原声', '轻音乐', '古典', '粤语', 'R&B']
@@ -24,8 +24,8 @@ const mutations = {
 
 const actions = {
   getCurrentTagMusics({ commit, state }, { count = 10, start = 0 }) {
-    axios
-      .get('/api/music/search', {
+    request
+      .get('/v2/music/search', {
         params: {
           tag: state.currentMusicTag,
           count,
@@ -33,8 +33,8 @@ const actions = {
         }
       })
       .then(response => {
-        commit(types.SET_TAG_MUSICS, response.data.musics)
-        commit(types.SET_CURRENT_TAG_MUSICS, response.data.musics)
+        commit(types.SET_TAG_MUSICS, response.musics)
+        commit(types.SET_CURRENT_TAG_MUSICS, response.musics)
       })
   }
 }

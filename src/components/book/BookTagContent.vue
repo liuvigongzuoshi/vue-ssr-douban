@@ -20,18 +20,18 @@
       <ul
         v-for="(books, index) in processedBooks"
         v-show="index === currentPage"
-        :key="index"
+        :key="index + 1"
         ref="bookList"
         class="book-tag-content-list"
       >
-        <li v-for="(book, index) in books" :key="book.id">
+        <li v-for="(book, i) in books" :key="i">
           <a :href="book.alt" :title="book.title">
             <img
               :src="book.images.large"
               :alt="book.title"
               class="book-tag-content-image"
               referrerpolicy="no-referrer"
-              @mouseenter="showBookPrompt(book, index)"
+              @mouseenter="showBookPrompt(book, i)"
               @mouseleave="hideBookPrompt()"
             />
           </a>
