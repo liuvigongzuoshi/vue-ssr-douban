@@ -19,7 +19,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/book-tag'
+      redirect: '/city'
     },
     {
       path: '/book-tag',
