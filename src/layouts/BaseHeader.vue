@@ -191,16 +191,16 @@ export default {
   background-repeat: no-repeat;
 }
 .book-logo {
-  background-image: url('../../assets/book.png');
+  background-image: url('../assets/book.png');
 }
 .movie-logo {
-  background-image: url('../../assets/movie.png');
+  background-image: url('../assets/movie.png');
 }
 .music-logo {
-  background-image: url('../../assets/music.png');
+  background-image: url('../assets/music.png');
 }
 .city-logo {
-  background-image: url('../../assets/city.png');
+  background-image: url('../assets/city.png');
 }
 .search-target {
   display: inline-block;
@@ -232,16 +232,16 @@ export default {
   background-position: 0 -40px;
 }
 .book-search-icon {
-  background-image: url('../../assets/book_search_btn.png');
+  background-image: url('../assets/book_search_btn.png');
 }
 .movie-search-icon {
-  background-image: url('../../assets/movie_search_btn.png');
+  background-image: url('../assets/movie_search_btn.png');
 }
 .music-search-icon {
-  background-image: url('../../assets/music_search_btn.png');
+  background-image: url('../assets/music_search_btn.png');
 }
 .city-search-icon {
-  background-image: url('../../assets/city_search_btn.png');
+  background-image: url('../assets/city_search_btn.png');
 }
 .search-suggest {
   position: absolute;

@@ -68,8 +68,9 @@
 </template>
 
 <script>
-import BaseSlide from '../common/BaseSlide.vue'
-import BaseModal from '../common/BaseModal.vue'
+import BaseSlide from '@/components/BaseSlide.vue'
+import BaseModal from '@/components/BaseModal.vue'
+
 export default {
   name: 'MovieTimeTypeContent',
   components: {

@@ -64,7 +64,8 @@
 </template>
 
 <script>
-import BaseSlide from '../common/BaseSlide.vue'
+import BaseSlide from '@/components/BaseSlide.vue'
+
 export default {
   name: 'BookTagContent',
   components: {

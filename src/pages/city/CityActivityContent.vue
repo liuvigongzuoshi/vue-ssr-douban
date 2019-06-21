@@ -11,6 +11,7 @@
 
 <script>
 import CityActivityContentItem from './CityActivityContentItem.vue'
+
 export default {
   name: 'CityActivityContent',
   components: {

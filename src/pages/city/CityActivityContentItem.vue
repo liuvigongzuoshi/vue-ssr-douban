@@ -40,6 +40,7 @@
 
 <script>
 import request from '@/util/request'
+
 export default {
   name: 'CityActivityContentItem',
   props: {

@@ -3,17 +3,23 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const BaseHeader = () => import('../components/common/BaseHeader.vue')
-const BookTag = () => import('../components/book/BookTag.vue')
-const BookTagContent = () => import('../components/book/BookTagContent.vue')
-const BookTagMoreContent = () => import('../components/book/BookTagMoreContent.vue')
-const BookTypeContent = () => import('../components/book/BookTypeContent.vue')
-const MovieTimeTypeContent = () => import('../components/movie/MovieTimeTypeContent.vue')
-const MovieTagContent = () => import('../components/movie/MovieTagContent.vue')
-const MovieTag = () => import('../components/movie/MovieTag.vue')
-const MusicTagContent = () => import('../components/music/MusicTagContent.vue')
-const CityTag = () => import('../components/city/CityTag.vue')
-const CityActivityContent = () => import('../components/city/CityActivityContent')
+const BaseHeader = () => import(/* webpackChunkName: "BaseHeader" */ '@/layouts/BaseHeader.vue')
+
+const BookTag = () => import(/* webpackChunkName: "BookTag" */ '@/pages/book/BookTag.vue')
+const BookTagContent = () => import(/* webpackChunkName: "BookTagContent" */ '@/pages/book/BookTagContent.vue')
+const BookTagMoreContent = () =>
+  import(/* webpackChunkName: "BookTagMoreContent" */ '@/pages/book/BookTagMoreContent.vue')
+const BookTypeContent = () => import(/* webpackChunkName: "BookTypeContent" */ '@/pages/book/BookTypeContent.vue')
+
+const MovieTimeTypeContent = () =>
+  import(/* webpackChunkName: "MovieTimeTypeContent" */ '@/pages/movie/MovieTimeTypeContent.vue')
+const MovieTagContent = () => import(/* webpackChunkName: "MovieTagContent" */ '@/pages/movie/MovieTagContent.vue')
+const MovieTag = () => import(/* webpackChunkName: "MovieTag" */ '@/pages/movie/MovieTag.vue')
+const MusicTagContent = () => import(/* webpackChunkName: "MusicTagContent" */ '@/pages/music/MusicTagContent.vue')
+
+const CityTag = () => import(/* webpackChunkName: "CityTag" */ '@/pages/city/CityTag.vue')
+const CityActivityContent = () =>
+  import(/* webpackChunkName: "CityActivityContent" */ '@/pages/city/CityActivityContent')
 
 export default new Router({
   routes: [
