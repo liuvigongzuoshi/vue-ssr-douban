@@ -20,12 +20,11 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8100,
     autoOpenBrowser: true,
     // Assets folder Directory
     assetsSubDirectory: '',
     assetsPublicPath: '/',
-    proxy: {
+    proxyTable: {
       '/v2': {
         target: 'https://douban.uieee.com',
         changeOrigin: true

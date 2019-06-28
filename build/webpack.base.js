@@ -1,14 +1,15 @@
-const path = require('path');
-const webpack = require('webpack');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCssnanoPlugin = require('@intervolga/optimize-cssnano-plugin')
 
-const config = require('../config');
-const utils = require('./utils');
+const config = require('../config')
+const utils = require('./utils')
 
-const env = process.env.NODE_ENV;
+const isProd = process.env.NODE_ENV === 'production'
 
-const resolve = dir => path.join(__dirname, '..', dir);
+const resolve = dir => path.join(__dirname, '..', dir)
 
 const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
   const loaders = [
@@ -18,23 +19,24 @@ const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
     ,
     { loader: 'css-loader', options: cssOptions },
     { loader: 'postcss-loader' }
-  ].filter(Boolean);
+  ].filter(Boolean)
   if (preProcessor) {
     loaders.push({
       loader: preProcessor,
       options: Object.assign({}, preProcessorOptions ? preProcessorOptions : undefined)
-    });
+    })
   }
 
-  return loaders;
-};
+  return loaders
+}
 
 const baseConfig = {
-  entry: resolve('src/main.js'),
+  mode: isProd ? 'production' : 'development',
+  devtool: isProd ? (config.build.jsSourceMap ? 'source-map' : false) : 'cheap-module-source-map',
   output: {
     path: config.build.assetsRoot,
-    filename: 'js/[name].[hash].js',
-    publicPath: env === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath
+    publicPath: isProd ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
+    filename: '[name].[chunkhash].js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -144,7 +146,21 @@ const baseConfig = {
       }
     ]
   },
-  plugins: [new webpack.ProgressPlugin(), new VueLoaderPlugin()]
-};
+  plugins: isProd
+    ? [
+        new VueLoaderPlugin(),
+        new webpack.optimize.ModuleConcatenationPlugin(),
+        new MiniCssExtractPlugin({ filename: utils.assetsPath('css/[name].[contenthash].css') }),
+        new OptimizeCssnanoPlugin({
+          sourceMap: config.build.cssSourceMap,
+          cssnanoOptions: {
+            // https://cssnano.co/guides/optimisations
+            preset: ['default', { mergeLonghand: false }]
+          }
+        })
+      ]
+    : [],
+  plugins: [new VueLoaderPlugin(), new webpack.optimize.ModuleConcatenationPlugin()]
+}
 
-module.exports = baseConfig;
+module.exports = baseConfig

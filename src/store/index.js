@@ -113,14 +113,16 @@ const actions = {
   }
 }
 
-export default new Vuex.Store({
-  state,
-  mutations,
-  actions,
-  modules: {
-    book,
-    movie,
-    music,
-    city
-  }
-})
+export function createStore() {
+  return new Vuex.Store({
+    state,
+    mutations,
+    actions,
+    modules: {
+      book,
+      movie,
+      music,
+      city
+    }
+  })
+}

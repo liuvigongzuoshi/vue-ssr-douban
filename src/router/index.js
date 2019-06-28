@@ -21,71 +21,74 @@ const CityTag = () => import(/* webpackChunkName: "CityTag" */ '@/pages/city/Cit
 const CityActivityContent = () =>
   import(/* webpackChunkName: "CityActivityContent" */ '@/pages/city/CityActivityContent')
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      redirect: '/city'
-    },
-    {
-      path: '/book-tag',
-      name: 'bookTag',
-      components: {
-        default: BaseHeader,
-        aside: BookTag,
-        content: BookTagContent
+export function createRouter() {
+  return new Router({
+    mode: 'history',
+    routes: [
+      {
+        path: '/',
+        redirect: '/city'
+      },
+      {
+        path: '/book-tag',
+        name: 'bookTag',
+        components: {
+          default: BaseHeader,
+          aside: BookTag,
+          content: BookTagContent
+        }
+      },
+      {
+        path: '/book-tag-more-info',
+        name: 'bookTagMoreInfo',
+        components: {
+          default: BaseHeader,
+          aside: BookTag,
+          content: BookTagMoreContent
+        }
+      },
+      {
+        path: '/book-type',
+        name: 'bookType',
+        components: {
+          default: BaseHeader,
+          content: BookTypeContent
+        }
+      },
+      {
+        path: '/movie-show-time',
+        name: 'movieShowTime',
+        components: {
+          default: BaseHeader,
+          content: MovieTimeTypeContent
+        }
+      },
+      {
+        path: '/movie-tag',
+        name: 'movieTag',
+        components: {
+          default: BaseHeader,
+          aside: MovieTag,
+          content: MovieTagContent
+        }
+      },
+      {
+        path: '/music-tag',
+        name: 'musicTag',
+        components: {
+          default: BaseHeader,
+          content: MusicTagContent
+        }
+      },
+      {
+        path: '/city',
+        name: 'city',
+        components: {
+          default: BaseHeader,
+          aside: CityTag,
+          content: CityActivityContent
+        }
       }
-    },
-    {
-      path: '/book-tag-more-info',
-      name: 'bookTagMoreInfo',
-      components: {
-        default: BaseHeader,
-        aside: BookTag,
-        content: BookTagMoreContent
-      }
-    },
-    {
-      path: '/book-type',
-      name: 'bookType',
-      components: {
-        default: BaseHeader,
-        content: BookTypeContent
-      }
-    },
-    {
-      path: '/movie-show-time',
-      name: 'movieShowTime',
-      components: {
-        default: BaseHeader,
-        content: MovieTimeTypeContent
-      }
-    },
-    {
-      path: '/movie-tag',
-      name: 'movieTag',
-      components: {
-        default: BaseHeader,
-        aside: MovieTag,
-        content: MovieTagContent
-      }
-    },
-    {
-      path: '/music-tag',
-      name: 'musicTag',
-      components: {
-        default: BaseHeader,
-        content: MusicTagContent
-      }
-    },
-    {
-      path: '/city',
-      name: 'city',
-      components: {
-        default: BaseHeader,
-        aside: CityTag,
-        content: CityActivityContent
-      }
-    }
-  ]
-})
+    ]
+  })
+}
