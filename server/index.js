@@ -25,7 +25,7 @@ function createRenderer(bundle, options) {
     bundle,
     Object.assign(options, {
       // for component caching
-      cache: LRU({
+      cache: new LRU({
         max: 1000,
         maxAge: 1000 * 60 * 15
       }),
@@ -123,7 +123,7 @@ app.get(
       }
 )
 
-const port = (isProd === 'production' ? config.build.env : config.dev.env).PORT
+const port = (isProd ? config.build.env : config.dev.env).PORT
 app.listen(port, () => {
   console.log(`server started at localhost:${port}`)
 })
