@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssnanoPlugin = require('@intervolga/optimize-cssnano-plugin')
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 const config = require('../config')
 const utils = require('./utils')
@@ -160,7 +161,7 @@ const baseConfig = {
         })
       ]
     : [],
-  plugins: [new VueLoaderPlugin(), new webpack.optimize.ModuleConcatenationPlugin()]
+  plugins: [new VueLoaderPlugin(), new webpack.optimize.ModuleConcatenationPlugin(), new FriendlyErrorsPlugin()]
 }
 
 module.exports = baseConfig
