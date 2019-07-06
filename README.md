@@ -1,96 +1,22 @@
 # vue-ssr-douban
 
-A Vue SSR Project
+> My shining Nuxt.js project
 
-[![Build Status](https://www.travis-ci.org/liuvigongzuoshi/vue-ssr-douban.svg?branch=master)](https://www.travis-ci.org/liuvigongzuoshi/vue-ssr-douban)
+## Build Setup
 
-## 技术栈
+``` bash
+# install dependencies
+$ npm run install
 
-vue + vuex + vue-router + axios + webpack + ES6
+# serve with hot reload at localhost:3000
+$ npm run dev
 
-#### 如何运行
-运行前请先确认电脑上已经安装好node环境
+# build for production and launch server
+$ npm run build
+$ npm run start
 
- - 克隆项目到本地
-
-```shell
-git clone https://github.com/nh0007/vue-douban.git
+# generate static project
+$ npm run generate
 ```
 
- - 进入项目根目录，在命令行运行语句安装依赖：
-
-```shell
-npm install
-```
-
- - 运行项目
-
-```shell
-npm run dev
-```
-
- - 等待运行完毕后，在浏览器输入命令行提示地址，可看到项目效果。
-
-## 代码结构
-```shell
-├── assets  //图片资源
-├── components  // 项目组件
-│   ├── book  //图书组件
-│       ├── BookTag.vue
-│       ├── BookTagContent.vue
-│       ├── BookTagMoreContent.vue
-│       └── BookTypeContent.vue
-│   ├── city  //同城活动组件
-│       ├── CityActivityContent.vue
-│       ├── CityActivityContentItem.vue
-│       └── CityTag.vue
-│   ├── common  //公用组件
-│       ├── BaseHeader.vue
-│       ├── BaseModal.vue
-│       └── BaseSlide.vue
-│   ├── movie  //电影组件
-│       ├── MovieTag.vue
-│       ├── MovieTagContent.vue
-│       └── MovieTimeTypeContent.vue
-│   ├── music  //音乐组件
-│       └── MusicTagContent.vue
-├── css  // 公用的CSS样式
-│   └── style.css
-├── router  // 前端路由配置
-│   └── index.js
-├── store  // vuex数据管理
-│   ├── module  // 子模块数据
-│       ├── book.js
-│       ├── city.js
-│       ├── movie.js
-│       └── music.js
-│   ├── index.js
-│   └── mutation-types.js
-├── util  // 公用的js函数
-│   └── util.js
-├── App.vue // 根组件
-└── main.js  // 入口文件
-```
-
-## 项目截图
-读书页：
-![bookTagContent](https://github.com/nh0007/vue-douban/raw/master/screenshot/bookTagContent.png)
-
-![bookTagMoreContent](https://github.com/nh0007/vue-douban/raw/master/screenshot/bookTagMoreContent.png)
-
-![bookTypeContent](https://github.com/nh0007/vue-douban/raw/master/screenshot/bookTypeContent.png)
-
-电影页：
-![movieTagContent](https://github.com/nh0007/vue-douban/raw/master/screenshot/movieTagContent.png)
-
-![movieTypeContent](https://github.com/nh0007/vue-douban/raw/master/screenshot/movieTypeContent.png)
-
-音乐页：
-![musicContent](https://github.com/nh0007/vue-douban/raw/master/screenshot/musicContent.png)
-
-同城活动页：
-![cityContent](https://github.com/nh0007/vue-douban/raw/master/screenshot/cityContent.png)
-
-搜索页：
-![search](https://github.com/nh0007/vue-douban/raw/master/screenshot/search.png)
-
+For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).

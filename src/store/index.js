@@ -1,13 +1,9 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import request from '@/util/request'
+// import Vuex from 'vuex'
 import * as types from './mutation-types'
-import book from './module/book'
-import movie from './module/movie'
-import music from './module/music'
-import city from './module/city'
-
-Vue.use(Vuex)
+// import book from './book'
+// import movie from './movie'
+// import music from './music'
+// import city from './city'
 
 // 本应用主要划分为四个模块：读书、电影、音乐、同城活动，有些模块下面划分了更小的模块，如读书模块还有'按标签分类'和'按类型分类'子模块
 // 此处的moduleTypes主要用于BaseHeader部件，切换不同模块时，BaseHeader部件的背景颜色，logo，搜索提示内容，搜索的字段等都会有不同，因此将信息存放至此对象，方便读取。
@@ -23,11 +19,11 @@ const moduleTypes = [
     subTypes: [
       {
         text: '按标签分类',
-        path: 'book-tag'
+        path: '/book/tag'
       },
       {
         text: '按类型分类',
-        path: 'book-type'
+        path: '/book/type'
       }
     ]
   },
@@ -42,11 +38,11 @@ const moduleTypes = [
     subTypes: [
       {
         text: '按时间分类',
-        path: 'movie-show-time'
+        path: '/movie/time-type'
       },
       {
         text: '按标签分类',
-        path: 'movie-tag'
+        path: '/movie/tag'
       }
     ]
   },
@@ -61,7 +57,7 @@ const moduleTypes = [
     subTypes: [
       {
         text: '按标签分类',
-        path: 'music-tag'
+        path: '/music/tag'
       }
     ]
   },
@@ -75,19 +71,19 @@ const moduleTypes = [
     subTypes: [
       {
         text: '按城市分类',
-        path: 'city'
+        path: '/city/activity'
       }
     ]
   }
 ]
 
-const state = {
+export const state = () => ({
   moduleTypes,
   currentModuleType: moduleTypes[0],
   searchData: []
-}
+})
 
-const mutations = {
+export const mutations = {
   [types.CHANGE_CURRENT_MODULE_TYPE](state, moduleType) {
     state.currentModuleType = moduleType
   },
@@ -96,31 +92,35 @@ const mutations = {
   }
 }
 
-const actions = {
+export const actions = {
   // 根据关键字以及当前所处的模块发送对应的搜索请求，处在读书模块和电影模块搜索相同的关键字发送的是不同的请求
   getSearchData({ commit, state }, { keyword, count = 6, start = 0 }) {
-    request
-      .get(`/v2/${state.currentModuleType.value}/search`, {
+    this.$axios
+      .$get(`/v2/${state.currentModuleType.value}/search`, {
         params: {
           q: keyword,
           start,
           count
         }
       })
-      .then(response => {
+      .then((response) => {
         commit(types.SET_SEARCH_DATA, response[state.currentModuleType.field])
       })
   }
 }
 
-export default new Vuex.Store({
-  state,
-  mutations,
-  actions,
-  modules: {
-    book,
-    movie,
-    music,
-    city
-  }
-})
+// const createStore = () => {
+//   return new Vuex.Store({
+//     state,
+//     mutations,
+//     actions,
+//     modules: {
+//       book,
+//       movie,
+//       music,
+//       city
+//     }
+//   })
+// }
+
+// export default createStore
