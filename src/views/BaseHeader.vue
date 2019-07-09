@@ -81,6 +81,7 @@ export default {
       }
     }
   },
+
   data() {
     return {
       keyword: '',
@@ -122,34 +123,16 @@ export default {
           this.$store.dispatch('getSearchData', { keyword: newValue })
         }, 200)
       }
+    },
+    $route(newValue) {
+      this.keyword = ''
+      this.$store.commit('SET_SEARCH_DATA', [])
     }
   },
 
-  mounted() {
-    const hashName = window.location.hash.replace(/#\/?/, '')
-    this.onHashChange(hashName)
-  },
-
-  beforeRouteLeave(to, from, next) {
-    this.keyword = ''
-    this.$store.commit('SET_SEARCH_DATA', [])
-    this.onHashChange(to.name)
-    next()
-  },
+  mounted() {},
 
   methods: {
-    onHashChange(hashName) {
-      // 监听hash值的变化，比如说从读书界面跳转到电影界面时，会因此调整搜索界面的背景颜色，文字等信息
-      if (hashName.indexOf(this.currentModuleType.value) === -1) {
-        for (let i = 0, ii = this.moduleTypes.length; i < ii; i++) {
-          if (hashName.indexOf(this.moduleTypes[i].value) !== -1) {
-            this.$store.commit('CHANGE_CURRENT_MODULE_TYPE', this.moduleTypes[i])
-            return
-          }
-        }
-      }
-    },
-
     onInputFocus() {
       this.isFocusOnInput = true
     },

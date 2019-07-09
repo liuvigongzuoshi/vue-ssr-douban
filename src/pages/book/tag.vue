@@ -74,6 +74,7 @@ export default {
   layout: 'douban',
 
   name: 'BookTagContent',
+
   components: {
     BaseSlide,
     BookTag
@@ -94,7 +95,8 @@ export default {
       loadPrompt: false,
       showPrompt: false,
       promptStyle: null,
-      currentBookPrompt: null
+      currentBookPrompt: null,
+      keysword: null
     }
   },
 
@@ -118,12 +120,13 @@ export default {
     }
   },
 
-  mounted() {
-    if (this.currentTagBooks.length < 40) {
-      // 默认加载40本书
-      this.$store.dispatch('book/getCurrentTagBooks', { count: 40 })
-    }
+  fetch({ store }) {
+    store.commit('CHANGE_CURRENT_MODULE_TYPE', store.state.moduleTypes[0])
+    // 默认加载40本书
+    return store.dispatch('book/getCurrentTagBooks', { count: 40 })
   },
+
+  mounted() {},
 
   methods: {
     changePage(page) {

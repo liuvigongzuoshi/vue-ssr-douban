@@ -47,7 +47,9 @@
 <script>
 export default {
   layout: 'douban',
+
   name: 'MusicTagContent',
+
   computed: {
     musicTags() {
       return this.$store.state.music.musicTags
@@ -63,12 +65,15 @@ export default {
     }
   },
 
-  mounted() {
-    if (this.currentTagMusics.length === 0) {
+  fetch({ store }) {
+    store.commit('CHANGE_CURRENT_MODULE_TYPE', store.state.moduleTypes[2])
+    if (store.state.music.currentTagMusics.length === 0) {
       // 默认加载24张专辑
-      this.$store.dispatch('music/getCurrentTagMusics', { count: 24 })
+      return store.dispatch('music/getCurrentTagMusics', { count: 24 })
     }
   },
+
+  mounted() {},
 
   methods: {
     changeMusicTag(tag) {

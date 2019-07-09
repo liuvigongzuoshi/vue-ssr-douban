@@ -37,7 +37,7 @@ export const mutations = {
 
 export const actions = {
   getCities({ commit }, { start = 0, count = 20 }) {
-    this.$axios
+    return this.$axios
       .$get('/v2/loc/list', {
         params: {
           start,

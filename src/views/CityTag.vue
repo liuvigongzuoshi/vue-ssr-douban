@@ -20,6 +20,7 @@
 <script>
 export default {
   name: 'CityTag',
+
   computed: {
     cities() {
       return this.$store.state.city.cities
@@ -29,12 +30,7 @@ export default {
     }
   },
 
-  mounted() {
-    if (this.cities.length === 0) {
-      // 默认获取20个城市
-      this.$store.dispatch('city/getCities', { start: 0, count: 20 })
-    }
-  },
+  mounted() {},
 
   methods: {
     changeCurrentCity(city) {

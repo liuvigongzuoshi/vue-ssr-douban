@@ -18,7 +18,9 @@ import CityTag from '@/views/CityTag.vue'
 
 export default {
   layout: 'douban',
+
   name: 'CityEventsContent',
+
   components: {
     CityEventsItem,
     CityTag
@@ -30,6 +32,14 @@ export default {
     },
     dayTypes() {
       return this.$store.state.city.dayTypes
+    }
+  },
+
+  fetch({ store }) {
+    store.commit('CHANGE_CURRENT_MODULE_TYPE', store.state.moduleTypes[3])
+    if (store.state.city.cities.length === 0) {
+      // 默认获取20个城市
+      return store.dispatch('city/getCities', { start: 0, count: 20 })
     }
   }
 }

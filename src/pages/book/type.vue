@@ -58,12 +58,15 @@ export default {
     }
   },
 
-  mounted() {
-    if (this.currentTypeBooks.length === 0) {
+  fetch({ store }) {
+    store.commit('CHANGE_CURRENT_MODULE_TYPE', store.state.moduleTypes[0])
+    if (store.state.book.currentTypeBooks.length === 0) {
       // 默认一页显示12本书
-      this.$store.dispatch('book/getTypeBooks', { count: 12 })
+      return store.dispatch('book/getTypeBooks', { count: 12 })
     }
   },
+
+  mounted() {},
 
   methods: {
     changeBookType(bookType) {

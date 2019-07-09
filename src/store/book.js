@@ -77,7 +77,7 @@ export const mutations = {
 
 export const actions = {
   getCurrentTagBooks({ commit, state }, { count = 10, start = 0, type }) {
-    this.$axios
+    return this.$axios
       .$get('/v2/book/search', {
         params: {
           tag: state.currentBookTag,
@@ -91,7 +91,7 @@ export const actions = {
       })
   },
   getTypeBooks({ commit, state }, { count = 10, start = 0 }) {
-    this.$axios
+    return this.$axios
       .$get('/v2/book/search', {
         params: {
           q: state.currentBookType,

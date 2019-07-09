@@ -23,7 +23,7 @@ export const mutations = {
 
 export const actions = {
   getCurrentTagMusics({ commit, state }, { count = 10, start = 0 }) {
-    this.$axios
+    return this.$axios
       .$get('/v2/music/search', {
         params: {
           tag: state.currentMusicTag,

@@ -67,11 +67,14 @@ export default {
     }
   },
 
-  mounted() {
-    if (this.currentTagBooks.length === 0) {
-      this.$store.dispatch('book/getCurrentTagBooks', { count: 10 })
+  fetch({ store }) {
+    store.commit('CHANGE_CURRENT_MODULE_TYPE', store.state.moduleTypes[0])
+    if (store.state.book.currentTagBooks.length === 0) {
+      return store.dispatch('book/getCurrentTagBooks', { count: 10 })
     }
   },
+
+  mounted() {},
 
   methods: {
     getStarStyle(score) {

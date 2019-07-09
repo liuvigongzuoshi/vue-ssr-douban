@@ -40,7 +40,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: 'green' },
   /*
    ** Global CSS
    */
@@ -48,7 +48,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/vue-inject.js'],
+  plugins: ['~/plugins/vue-inject.js', '~/plugins/axios'],
   /*
    ** Nuxt.js modules
    */
@@ -62,7 +62,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: process.env.baseUr,
+    baseURL: 'https://douban.uieee.com',
     proxy: true // Can be also an object with default options
   },
 

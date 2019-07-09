@@ -83,12 +83,15 @@ export default {
     }
   },
 
-  mounted() {
-    if (!this.tagMovies[this.currentMovieTag]) {
+  fetch({ store }) {
+    store.commit('CHANGE_CURRENT_MODULE_TYPE', store.state.moduleTypes[1])
+    if (!store.state.movie.tagMovies[store.state.movie.currentMovieTag]) {
       // 默认显示20部电影
-      this.$store.dispatch('movie/getCurrentTagMovies', { count: 20 })
+      return store.dispatch('movie/getCurrentTagMovies', { count: 20 })
     }
   },
+
+  mounted() {},
 
   methods: {
     changePage(page) {

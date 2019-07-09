@@ -114,12 +114,15 @@ export default {
     }
   },
 
-  mounted() {
-    if (!this.timeTypeMovies[this.currentMovieTimeType.value]) {
+  fetch({ store }) {
+    store.commit('CHANGE_CURRENT_MODULE_TYPE', store.state.moduleTypes[1])
+    if (!store.state.movie.timeTypeMovies[store.state.movie.currentMovieTimeType.value]) {
       // 默认加载48部电影
-      this.$store.dispatch('movie/getTimeTypeMovies', { start: 0, count: 48 })
+      return store.dispatch('movie/getTimeTypeMovies', { start: 0, count: 48 })
     }
   },
+
+  mounted() {},
 
   methods: {
     changePage(page) {

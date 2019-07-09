@@ -56,7 +56,7 @@ export const mutations = {
 
 export const actions = {
   getTimeTypeMovies({ commit }, { start = 0, count = 10, searchParams = 'in_theaters' }) {
-    this.$axios
+    return this.$axios
       .$get(`/v2/movie/${searchParams}`, {
         params: {
           start,
@@ -69,7 +69,7 @@ export const actions = {
       })
   },
   getCurrentTagMovies({ commit, state }, { start = 0, count = 10 }) {
-    this.$axios
+    return this.$axios
       .$get('/v2/movie/search', {
         params: {
           start,
