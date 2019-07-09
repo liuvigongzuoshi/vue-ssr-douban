@@ -1,75 +1,82 @@
 <template>
-  <div class="left-content">
-    <div class="content-header">
-      <h2>{{ currentBookTag }}</h2>
-      <router-link to="book-tag-more-info" class="common-link">
-        更多»
-      </router-link>
+  <div>
+    <div class="left-content">
+      <div class="content-header">
+        <h2>{{ currentBookTag }}</h2>
+        <nuxt-link to="/book/more-info" class="common-link">
+          更多»
+        </nuxt-link>
 
-      <base-slide
-        class="book-tag-content-slide"
-        :page-count="pageCount"
-        :current-page="currentPage"
-        background-color="#9b9a8e"
-        @change-page="changePage"
-        @change-direction="changeDirection"
-      />
-    </div>
+        <base-slide
+          class="book-tag-content-slide"
+          :page-count="pageCount"
+          :current-page="currentPage"
+          background-color="#9b9a8e"
+          @change-page="changePage"
+          @change-direction="changeDirection"
+        />
+      </div>
 
-    <transition-group tag="div" class="book-tag-content" :name="transitionName">
-      <ul
-        v-for="(books, index) in processedBooks"
-        v-show="index === currentPage"
-        :key="index + 1"
-        ref="bookList"
-        class="book-tag-content-list"
-      >
-        <li v-for="(book, i) in books" :key="i">
-          <a :href="book.alt" :title="book.title">
-            <img
-              :src="book.images.large"
-              :alt="book.title"
-              class="book-tag-content-image"
-              referrerpolicy="no-referrer"
-              @mouseenter="showBookPrompt(book, i)"
-              @mouseleave="hideBookPrompt()"
-            />
-          </a>
-          <h3 class="link-title">
+      <transition-group tag="div" class="book-tag-content" :name="transitionName">
+        <ul
+          v-for="(books, index) in processedBooks"
+          v-show="index === currentPage"
+          :key="index + 1"
+          ref="bookList"
+          class="book-tag-content-list"
+        >
+          <li v-for="(book, i) in books" :key="i">
             <a :href="book.alt" :title="book.title">
-              {{ book.title }}
+              <img
+                :src="book.images.large"
+                :alt="book.title"
+                class="book-tag-content-image"
+                referrerpolicy="no-referrer"
+                @mouseenter="showBookPrompt(book, i)"
+                @mouseleave="hideBookPrompt()"
+              />
             </a>
-          </h3>
-          <p class="book-tag-content-author">
-            {{ book.author.join() }}
-          </p>
-        </li>
-      </ul>
-    </transition-group>
+            <h3 class="link-title">
+              <a :href="book.alt" :title="book.title">
+                {{ book.title }}
+              </a>
+            </h3>
+            <p class="book-tag-content-author">
+              {{ book.author.join() }}
+            </p>
+          </li>
+        </ul>
+      </transition-group>
 
-    <div v-if="loadPrompt" v-show="showPrompt" class="book-tag-content-prompt" :style="promptStyle">
-      <span class="outside-triangle" />
-      <span class="inside-triangle" />
-      <h3 class="prompt-title">
-        {{ currentBookPrompt.title }}
-      </h3>
-      <p class="prompt-introduce">
-        {{ currentBookPrompt.author.join() }} / {{ currentBookPrompt.pubdate }} / {{ currentBookPrompt.publisher }}
-      </p>
-      <p class="prompt-summary">
-        {{ currentBookPrompt.summary | processedSummary(160) }}
-      </p>
+      <div v-if="loadPrompt" v-show="showPrompt" class="book-tag-content-prompt" :style="promptStyle">
+        <span class="outside-triangle" />
+        <span class="inside-triangle" />
+        <h3 class="prompt-title">
+          {{ currentBookPrompt.title }}
+        </h3>
+        <p class="prompt-introduce">
+          {{ currentBookPrompt.author.join() }} / {{ currentBookPrompt.pubdate }} / {{ currentBookPrompt.publisher }}
+        </p>
+        <p class="prompt-summary">
+          {{ currentBookPrompt.summary | processedSummary(160) }}
+        </p>
+      </div>
     </div>
+    <BookTag />
   </div>
 </template>
 
 <script>
 import BaseSlide from '@/components/BaseSlide.vue'
+import BookTag from '@/views/BookTag.vue'
 
 export default {
+  layout: 'douban',
+
   name: 'BookTagContent',
   components: {
-    BaseSlide
+    BaseSlide,
+    BookTag
   },
 
   filters: {

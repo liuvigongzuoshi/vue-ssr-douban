@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  layout: 'default',
+  layout: 'blog',
   props: {
     error: {
       type: Object,
@@ -23,3 +23,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.container {
+  text-align: center;
+}
+</style>

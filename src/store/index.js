@@ -38,7 +38,7 @@ const moduleTypes = [
     subTypes: [
       {
         text: '按时间分类',
-        path: '/movie/time-type'
+        path: '/movie/time'
       },
       {
         text: '按标签分类',
@@ -71,7 +71,7 @@ const moduleTypes = [
     subTypes: [
       {
         text: '按城市分类',
-        path: '/city/activity'
+        path: '/city/events'
       }
     ]
   }

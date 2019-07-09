@@ -1,45 +1,56 @@
 <template>
-  <div class="left-content">
-    <div class="content-header">
-      <h2>{{ currentMovieTag }}</h2>
+  <div>
+    <div class="left-content">
+      <div class="content-header">
+        <h2>{{ currentMovieTag }}</h2>
 
-      <base-slide
-        class="movie-tag-content-slide"
-        :page-count="pageCount"
-        :current-page="currentPage"
-        background-color="#6D98D2"
-        @change-page="changePage"
-        @change-direction="changeDirection"
-      />
+        <base-slide
+          class="movie-tag-content-slide"
+          :page-count="pageCount"
+          :current-page="currentPage"
+          background-color="#6D98D2"
+          @change-page="changePage"
+          @change-direction="changeDirection"
+        />
+      </div>
+
+      <transition-group tag="div" class="movie-content" :name="transitionName">
+        <ul
+          v-for="(movies, index) in processedMovies"
+          v-show="index === currentPage"
+          :key="index + 1"
+          class="movie-list"
+        >
+          <li v-for="movie in movies" :key="movie.id">
+            <a :href="movie.alt">
+              <img :src="movie.images.large" :alt="movie.title" class="movie-image" referrerpolicy="no-referrer" />
+            </a>
+            <h3 class="link-title">
+              <a :href="movie.alt" :title="movie.title">{{ movie.title }}</a>
+            </h3>
+            <p class="movie-score">
+              评分：
+              <span>{{ movie.rating.average }}</span>
+            </p>
+            <p class="movie-year">上映时间：{{ movie.year }}</p>
+          </li>
+        </ul>
+      </transition-group>
     </div>
-
-    <transition-group tag="div" class="movie-content" :name="transitionName">
-      <ul v-for="(movies, index) in processedMovies" v-show="index === currentPage" :key="index + 1" class="movie-list">
-        <li v-for="movie in movies" :key="movie.id">
-          <a :href="movie.alt">
-            <img :src="movie.images.large" :alt="movie.title" class="movie-image" referrerpolicy="no-referrer" />
-          </a>
-          <h3 class="link-title">
-            <a :href="movie.alt" :title="movie.title">{{ movie.title }}</a>
-          </h3>
-          <p class="movie-score">
-            评分：
-            <span>{{ movie.rating.average }}</span>
-          </p>
-          <p class="movie-year">上映时间：{{ movie.year }}</p>
-        </li>
-      </ul>
-    </transition-group>
+    <MovieTag />
   </div>
 </template>
 
 <script>
 import BaseSlide from '@/components/BaseSlide.vue'
+import MovieTag from '@/views/MovieTag.vue'
 
 export default {
+  layout: 'douban',
   name: 'MovieTagContent',
   components: {
-    BaseSlide
+    BaseSlide,
+    MovieTag
   },
 
   data() {

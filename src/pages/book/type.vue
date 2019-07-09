@@ -39,7 +39,10 @@
 
 <script>
 export default {
+  layout: 'douban',
+
   name: 'BookTypeContent',
+
   computed: {
     bookTypes() {
       return this.$store.state.book.bookTypes

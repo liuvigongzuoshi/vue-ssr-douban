@@ -10,6 +10,7 @@
     "precommit": "npm run lint",
     "dev": "nuxt",
     "build": "nuxt build",
+    "build-r": "nuxt build --analyze",
     "start": "nuxt start",
     "generate": "nuxt generate"
   },

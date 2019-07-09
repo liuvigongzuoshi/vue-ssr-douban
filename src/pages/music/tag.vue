@@ -46,6 +46,7 @@
 
 <script>
 export default {
+  layout: 'douban',
   name: 'MusicTagContent',
   computed: {
     musicTags() {

@@ -72,6 +72,7 @@ import BaseSlide from '@/components/BaseSlide.vue'
 import BaseModal from '@/components/BaseModal.vue'
 
 export default {
+  layout: 'douban',
   name: 'MovieTimeTypeContent',
   components: {
     BaseSlide,

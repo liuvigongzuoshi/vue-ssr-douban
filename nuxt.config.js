@@ -1,5 +1,15 @@
 export default {
+  server: {
+    port: 8080,
+    host: 'localhost'
+  },
+
+  env: {
+    baseUrl: 'https://douban.uieee.com'
+  },
+
   srcDir: 'src/',
+
   mode: 'universal',
   /*
    ** Headers of the page
@@ -16,6 +26,16 @@ export default {
       }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+  },
+
+  router: {
+    base: '/',
+    extendRoutes(routes, resolve) {
+      routes.push({
+        path: '/',
+        redirect: 'book/tag'
+      })
+    }
   },
   /*
    ** Customize the progress-bar color
@@ -42,7 +62,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'https://douban.uieee.com',
+    baseURL: process.env.baseUr,
     proxy: true // Can be also an object with default options
   },
 
