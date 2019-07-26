@@ -1,6 +1,8 @@
 # vue-ssr-douban
 
-> My shining Nuxt.js project
+A Vue SSR Project
+
+[![Build Status](https://www.travis-ci.org/liuvigongzuoshi/vue-ssr-douban.svg?branch=nuxt)](https://www.travis-ci.org/liuvigongzuoshi/vue-ssr-douban)
 
 ## Build Setup
 
