@@ -4,9 +4,9 @@
       <ul>
         <li v-for="(tag, index) in musicTags" :key="index" class="music-tag-item">
           <a
-            href="javascript: void(0)"
             :class="{ active: tag === currentMusicTag, 'not-active': tag !== currentMusicTag }"
             @click="changeMusicTag(tag)"
+            href="javascript: void(0)"
           >
             {{ tag }}
           </a>
@@ -21,7 +21,7 @@
             <a href="javascript: void(0)">
               <img :src="music.image" class="music-image" referrerpolicy="no-referrer" />
             </a>
-            <a class="image-hover" :href="music.alt">
+            <a :href="music.alt" class="image-hover">
               <p v-for="(song, index) in getSongArray(music.attrs.tracks[0])" :key="index">
                 {{ song }}
               </p>
@@ -34,7 +34,7 @@
             {{ music.attrs.singer.join() }}
           </p>
           <p class="music-title">
-            <a :href="music.alt" class="music-title-link" :title="music.title">
+            <a :href="music.alt" :title="music.title" class="music-title-link">
               {{ music.title }}
             </a>
           </p>

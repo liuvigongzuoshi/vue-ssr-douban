@@ -8,21 +8,21 @@
         </nuxt-link>
 
         <base-slide
-          class="book-tag-content-slide"
           :page-count="pageCount"
           :current-page="currentPage"
-          background-color="#9b9a8e"
           @change-page="changePage"
           @change-direction="changeDirection"
+          class="book-tag-content-slide"
+          background-color="#9b9a8e"
         />
       </div>
 
-      <transition-group tag="div" class="book-tag-content" :name="transitionName">
+      <transition-group :name="transitionName" tag="div" class="book-tag-content">
         <ul
+          ref="bookList"
           v-for="(books, index) in processedBooks"
           v-show="index === currentPage"
           :key="index + 1"
-          ref="bookList"
           class="book-tag-content-list"
         >
           <li v-for="(book, i) in books" :key="i">
@@ -30,10 +30,10 @@
               <img
                 :src="book.images.large"
                 :alt="book.title"
-                class="book-tag-content-image"
-                referrerpolicy="no-referrer"
                 @mouseenter="showBookPrompt(book, i)"
                 @mouseleave="hideBookPrompt()"
+                class="book-tag-content-image"
+                referrerpolicy="no-referrer"
               />
             </a>
             <h3 class="link-title">
@@ -48,7 +48,7 @@
         </ul>
       </transition-group>
 
-      <div v-if="loadPrompt" v-show="showPrompt" class="book-tag-content-prompt" :style="promptStyle">
+      <div v-if="loadPrompt" v-show="showPrompt" :style="promptStyle" class="book-tag-content-prompt">
         <span class="outside-triangle" />
         <span class="inside-triangle" />
         <h3 class="prompt-title">

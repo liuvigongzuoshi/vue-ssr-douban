@@ -7,10 +7,10 @@
       <a
         v-for="(type, index) in dayTypes"
         :key="index"
-        href="javascript: void(0)"
-        class="day-type"
         :class="{ active: type === currentDayType, 'not-active': type !== currentDayType }"
         @click="changeDayType(type)"
+        href="javascript: void(0)"
+        class="day-type"
       >
         {{ type.text }}
       </a>
@@ -28,7 +28,7 @@
           <p class="date-info">
             {{ getDateString(activity.begin_time, activity.end_time) }}
           </p>
-          <p class="address-info" :title="activity.address">
+          <p :title="activity.address" class="address-info">
             {{ activity.address }}
           </p>
           <p>{{ activity.wisher_count + activity.participant_count }}人关注</p>

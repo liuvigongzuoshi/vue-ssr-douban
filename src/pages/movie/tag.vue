@@ -5,16 +5,16 @@
         <h2>{{ currentMovieTag }}</h2>
 
         <base-slide
-          class="movie-tag-content-slide"
           :page-count="pageCount"
           :current-page="currentPage"
-          background-color="#6D98D2"
           @change-page="changePage"
           @change-direction="changeDirection"
+          class="movie-tag-content-slide"
+          background-color="#6D98D2"
         />
       </div>
 
-      <transition-group tag="div" class="movie-content" :name="transitionName">
+      <transition-group :name="transitionName" tag="div" class="movie-content">
         <ul
           v-for="(movies, index) in processedMovies"
           v-show="index === currentPage"

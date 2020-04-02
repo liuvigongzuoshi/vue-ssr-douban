@@ -7,9 +7,9 @@
       <li
         v-for="(city, index) in cities"
         :key="index"
-        class="aside-item"
         :class="{ active: city === currentCity }"
         @click="changeCurrentCity(city)"
+        class="aside-item"
       >
         {{ city.name }}
       </li>

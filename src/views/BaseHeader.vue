@@ -1,7 +1,7 @@
 <template>
-  <div class="outer-content" :style="{ background: currentModuleType.backgroundColor }">
+  <div :style="{ background: currentModuleType.backgroundColor }" class="outer-content">
     <div class="inner-content">
-      <h2 class="search-logo" :class="currentModuleType.logo">
+      <h2 :class="currentModuleType.logo" class="search-logo">
         {{ currentModuleType.text }}
       </h2>
 
@@ -9,19 +9,19 @@
         <form class="search-form">
           <input
             v-model="keyword"
-            type="text"
-            class="search-input"
             :placeholder="currentModuleType.placeholder"
             @blur="onInputBlur()"
             @focus="onInputFocus()"
+            type="text"
+            class="search-input"
           />
-          <input type="submit" value="搜索" class="search-submit" :class="currentModuleType.searchIcon" />
+          <input :class="currentModuleType.searchIcon" type="submit" value="搜索" class="search-submit" />
         </form>
 
-        <ul v-show="showSearchSuggest" class="search-suggest" @mouseenter="onListFocus()" @mouseleave="onListBlur()">
+        <ul v-show="showSearchSuggest" @mouseenter="onListFocus()" @mouseleave="onListBlur()" class="search-suggest">
           <li v-for="item in searchData" :key="item.id" class="search-item">
-            <a class="search-item-link" :href="item.alt">
-              <img class="search-item-image" :src="item.image || item.images.small" referrerpolicy="no-referrer" />
+            <a :href="item.alt" class="search-item-link">
+              <img :src="item.image || item.images.small" class="search-item-image" referrerpolicy="no-referrer" />
               <h3 class="search-item-title">
                 {{ item.title }}
               </h3>
@@ -50,8 +50,8 @@
               <nuxt-link
                 v-for="subType in type.subTypes"
                 :key="subType.path"
-                class="more-module-link"
                 :to="subType.path"
+                class="more-module-link"
               >
                 {{ subType.text }}
               </nuxt-link>

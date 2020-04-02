@@ -8,9 +8,9 @@
       <li
         v-for="(bookTag, index) in bookTags"
         :key="index"
-        class="book-tag-item"
         :class="{ 'book-active-tag-item': bookTag === currentBookTags }"
         @click="changeCurrentBookTags(bookTag)"
+        class="book-tag-item"
       >
         {{ bookTag.tagName }}
       </li>
@@ -20,9 +20,9 @@
       <li
         v-for="(subTag, index) in currentBookTags.subTags"
         :key="index"
-        class="aside-item"
         :class="{ 'book-active-subtag-item': subTag === currentBookTag }"
         @click="changeCurrentBookTag(subTag)"
+        class="aside-item"
       >
         {{ subTag }}
       </li>

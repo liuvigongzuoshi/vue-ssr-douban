@@ -7,9 +7,9 @@
       <li
         v-for="(movieTag, index) in movieTags"
         :key="index"
-        class="aside-item"
         :class="{ 'active-movie-tag': movieTag === currentMovieTag }"
         @click="changeMovieTag(movieTag)"
+        class="aside-item"
       >
         {{ movieTag }}
       </li>

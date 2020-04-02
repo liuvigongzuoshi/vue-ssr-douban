@@ -6,32 +6,32 @@
       <a
         v-for="(type, index) in movieTimeTypes"
         :key="index"
-        href="javascript:void(0)"
-        class="movie-type-link"
         :class="{ active: type === currentMovieTimeType, 'not-active': type !== currentMovieTimeType }"
         @click="changeMovieTimeType(type)"
+        href="javascript:void(0)"
+        class="movie-type-link"
       >
         {{ type.text }}»
       </a>
 
       <base-slide
-        class="movie-slide"
         :page-count="pageCount"
         :current-page="currentPage"
-        background-color="#6D98D2"
         @change-page="changePage"
         @change-direction="changeDirection"
+        class="movie-slide"
+        background-color="#6D98D2"
       />
     </div>
 
-    <transition-group tag="div" class="movie-target" :name="transitionName">
+    <transition-group :name="transitionName" tag="div" class="movie-target">
       <ul v-for="(movies, index) in processedMovie" v-show="index === currentPage" :key="index + 1" class="movie-list">
         <li v-for="movie in movies" :key="movie.id" class="movie-item">
           <a :href="movie.alt">
             <img :src="movie.images.large" :alt="movie.title" class="movie-image" referrerpolicy="no-referrer" />
           </a>
           <h3 class="movie-title-target">
-            <a :href="movie.alt" class="movie-title" :title="movie.title">
+            <a :href="movie.alt" :title="movie.title" class="movie-title">
               {{ movie.title }}
             </a>
           </h3>
@@ -39,10 +39,10 @@
             暂无评分
           </p>
           <p v-if="movie.rating.average !== 0">
-            <span class="score-image" :style="getStarStyle(movie.rating.average)" />
+            <span :style="getStarStyle(movie.rating.average)" class="score-image" />
             <span class="movie-score">{{ movie.rating.average }}</span>
           </p>
-          <p v-if="currentMovieTimeType.value === 'in_theaters'" class="buy-ticket" @click="buyTicket(movie)">
+          <p v-if="currentMovieTimeType.value === 'in_theaters'" @click="buyTicket(movie)" class="buy-ticket">
             选座购票
           </p>
           <p v-if="currentMovieTimeType.value === 'coming_soon'" class="movie-genres">

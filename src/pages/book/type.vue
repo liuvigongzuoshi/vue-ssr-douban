@@ -5,10 +5,10 @@
       <a
         v-for="(bookType, index) in bookTypes"
         :key="index"
-        href="javascript:void(0)"
-        class="book-type-link"
         :class="{ active: bookType === currentBookType, 'not-active': bookType !== currentBookType }"
         @click="changeBookType(bookType)"
+        href="javascript:void(0)"
+        class="book-type-link"
       >
         {{ bookType }}
       </a>
@@ -24,7 +24,7 @@
             <a :href="book.alt">{{ book.title }}</a>
           </h3>
           <p>
-            <span class="score-image" :style="getStarStyle(book.rating.average)" />
+            <span :style="getStarStyle(book.rating.average)" class="score-image" />
             <span class="average-score">{{ book.rating.average }}</span>
           </p>
           <p>作者 : {{ book.author.join() }}</p>

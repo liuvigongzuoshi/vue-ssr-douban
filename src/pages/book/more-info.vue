@@ -16,7 +16,7 @@
             {{ book.price }}
           </p>
           <div>
-            <span class="score-image" :style="getStarStyle(book.rating.average)" />
+            <span :style="getStarStyle(book.rating.average)" class="score-image" />
             <span class="average-score">{{ book.rating.average }}</span>
             <span class="raters-number">({{ book.rating.numRaters }}人评价)</span>
           </div>
@@ -35,7 +35,7 @@
       </li>
     </ul>
 
-    <a class="more-book" href="javascript:void(0)" @click="loadMoreBooks">
+    <a @click="loadMoreBooks" class="more-book" href="javascript:void(0)">
       加载更多
     </a>
   </div>

@@ -1,6 +1,9 @@
 import * as types from './mutation-types'
 
-const movieTimeTypes = [{ value: 'in_theaters', text: '正在热映' }, { value: 'coming_soon', text: '即将上映' }]
+const movieTimeTypes = [
+  { value: 'in_theaters', text: '正在热映' },
+  { value: 'coming_soon', text: '即将上映' }
+]
 
 const movieTags = [
   '热门',
